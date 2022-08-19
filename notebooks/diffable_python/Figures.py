@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.6
+#       jupytext_version: 1.13.7
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -41,33 +41,33 @@ with schemdraw.Drawing() as d:
     d += flow.Box(w=6, h=2).label('Extracted Completion Date\n(n=21,766)').at((4.2,-8.8))
     d += flow.Line('down', l=2).at((1.3, -10.8))
     d += flow.Arrow('left', l=1)
-    d += flow.Box(w=5.5, h=1.5).label('Completed <24 Months\n(n=2,548)')
+    d += flow.Box(w=5.5, h=1.5).label('Completed <24 Months\n(n=2,584)')
     d += flow.Line('down', l=2).at((9, -10.8))
     d += flow.Arrow('right', l=1)
     d += flow.Box(w=5.5, h=1.5).label('Completed <24 Months\n(n=7,992)')
     
     d += flow.Arrow('left', l=1).at((1.3, -15))
-    d += flow.Box(w=5.5, h=1.5).label('Not Sampled\n(n=19,071)')
+    d += flow.Box(w=5.5, h=1.5).label('Not Sampled\n(n=18,829)')
     d += flow.Arrow('down', l=1).at((-2.5, -15.8))
     
     d += flow.Arrow('right', l=1).at((9, -15))
-    d += flow.Box(w=5.5, h=1.5).label('Not Sampled\n(n=7,706)')
+    d += flow.Box(w=5.5, h=1.5).label('Not Sampled\n(n=7,912)')
     d += flow.Arrow('down', l=1).at((12.8, -15.8))
     
     d += flow.Line('down', l=4).at((9, -12.8))
-    d += flow.Box(w=4.5, h=1.5).label('Inferred Included\n(n=353)')
+    d += flow.Box(w=4.5, h=1.5).label('Inferred Included\n(n=147)')
     d += flow.Line('down', l=4).at((1.3, -12.8))
-    d += flow.Box(w=4.5, h=1.5).label('Extracted Included\n(n=147)')
+    d += flow.Box(w=4.5, h=1.5).label('Extracted Included\n(n=353)')
     
     #Extracted Replaced
-    d += flow.Arrow('left', l=1).at((-1, -17.2))
+    d += flow.Arrow('left', l=1.1).at((-1, -17.2))
     d += flow.Arrow('right', l=1).at((-2, -18))
-    d += flow.Box(w=3, h=1.5).label('Replaced\n(n=14)').at((-5, -17.55))
+    d += flow.Circle(r=1.2).label('Replaced\n(n=14)').at((-4.4, -17.8))
     
     #Inferred Replaced
-    d += flow.Arrow('right', l=1).at((11.3, -17.2))
+    d += flow.Arrow('right', l=1.1).at((11.3, -17.2))
     d += flow.Arrow('left', l=1).at((12.3, -18))
-    d += flow.Box(w=3, h=1.5).label('Replaced\n(n=5)').at((15.3, -17.55))
+    d += flow.Circle(r=1.2).label('Replaced\n(n=5)').at((14.7, -17.8))
     
     #Final
     d += flow.Arrow(l=3).theta(-45).at((1.3,-18.3))
@@ -96,6 +96,33 @@ results = {'EUCTR': euctr, 'ClinicalTrials.gov': ctg, 'ISRCTN': isrctn, 'Journal
 venn(results)
 
 plt.show()
-# -
+# + trusted=true
+from upsetplot import from_indicators, plot
+import pandas as pd
+import numpy as np
+
+# + trusted=true
+df = pd.DataFrame(list(range(0,500)))
+df.columns = ['ids']
+
+# + trusted=true
+df['EUCTR'] = np.where(df.ids.isin(euctr), True, False)
+df['CTG'] = np.where(df.ids.isin(ctg), True, False)
+df['ISRCTN'] = np.where(df.ids.isin(isrctn), True, False)
+df['Journals'] = np.where(df.ids.isin(journals), True, False)
+
+# + trusted=true
+fig = plt.figure(figsize=(12, 7), dpi=300)
+plot(from_indicators(["EUCTR", "CTG", "ISRCTN", "Journals"],
+                      data=df), 
+     sort_by='degree', 
+     show_counts=True, 
+     fig=fig, 
+     element_size=None, 
+     totals_plot_elements=3)
+
+plt.show()
+
+# +
 
 
