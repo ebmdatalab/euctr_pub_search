@@ -1,0 +1,501 @@
+Timestamp,Trial Start Year,Enrollment,Location,Notes,Trial ID
+10/27/2021 16:17:16,2014,100,Non-EEA,From EUCTR Results,2014-003401-15
+10/27/2021 16:18:06,2011,167,EEA and Non-EEA,From EUCTR Results,2011-001616-57
+10/27/2021 16:19:07,2004,94,EEA and Non-EEA,From EUCTR Results,2004-002743-27
+10/27/2021 16:20:32,2013,63,EEA and Non-EEA,From EUCTR Results,2013-003561-34
+10/27/2021 16:25:43,2006,60,EEA Only,"Combo of EUCTR, ISRCTN, and Paper",2006-001414-33
+10/27/2021 16:27:59,2006,140,EEA Only,No results to base final enrolment on. EUCTR and CT.gov match on 140 so used that.,2005-005658-37
+10/27/2021 16:29:19,2011,67,EEA Only,From EUCTR Results Document,2010-022980-37
+10/27/2021 16:30:17,2017,2425,EEA and Non-EEA,From EUCTR Results,2016-002513-22
+10/27/2021 16:33:11,2008,31,EEA and Non-EEA,From EUCTR Results (CT.gov info differed slightly),2009-011276-29
+10/27/2021 16:41:15,2008,61,EEA Only,From EUCTR Results Document with context on enrolment from publication,2007-004612-31
+10/27/2021 16:43:48,2015,26,EEA Only,From EUCTR Results,2014-004655-31
+10/27/2021 16:45:06,2008,30,EEA Only,From EUCTR Results,2007-005979-34
+10/27/2021 16:48:48,2005,53,EEA Only,From EUCTR Results Document,2004-004891-36
+10/27/2021 16:50:49,2008,50,EEA Only,No results for extraction. Data from comparison of EUCTR and CT.gov entries.,2008-001889-81
+10/27/2021 16:51:52,2006,126,Non-EEA,From EUCTR Results,2014-001706-17
+10/27/2021 16:54:19,2012,101,EEA Only,From EUCTR Results,2010-022184-35
+10/27/2021 16:57:58,2008,161,EEA Only,Values from paper as compared to EUCTR and CT.gov,2006-003995-36
+10/27/2021 17:01:48,2015,314,EEA Only,Data from paper compared to trial registrations. Enrolment taken from paper.,2015-003397-33
+10/27/2021 17:08:17,2012,60,EEA Only,Data mainly from ClinicalTrials.gov entry cross-checked with EUCTR entry.,2012-002573-62
+10/28/2021 12:37:51,2015,72,EEA Only,From EUCTR Results and cross-checked in article,2015-001956-31
+10/28/2021 12:40:16,2005,12,EEA Only,These are based on the EUCTR registration which is the only thing I have to go off of.,2005-004685-17
+10/28/2021 13:24:54,2008,970,EEA and Non-EEA,From EUCTR Results,2007-002627-32
+10/28/2021 13:26:02,2011,72,EEA Only,These are based on the EUCTR registration which is the only thing I have to go off of.,2010-023481-41
+10/28/2021 13:27:50,2010,60,EEA Only,Based on cross-checking the EUCTR and ClinicalTrials.gov reg,2009-012543-42
+10/28/2021 13:33:36,2010,142,EEA Only,"EUCTR results document cross-checked with article. EUCTR results said recruitment started in 2011 but based on approval dates, the article date of 2010 seems more likely so have used that. May be a type on the results word doc.",2009-017842-30
+10/28/2021 13:35:30,2013,60,EEA Only,From EUCTR Results Document,2012-004993-25
+10/28/2021 13:39:00,2004,806,EEA and Non-EEA,From EUCTR Results Document,2004-000091-14
+10/28/2021 13:41:42,2012,18,EEA Only,Mainly taken from ClinicalTrials.gov as was updated after completion,2012-002105-22
+10/28/2021 13:43:30,2009,40,EEA Only,These are based on the EUCTR registration which is the only thing I have to go off of.,2008-007712-14
+10/28/2021 13:46:35,2006,38,EEA and Non-EEA,Mainly based on updated ClinicalTrials.gov entry cross-referenced with EUCTR reg.,2005-003482-17
+10/28/2021 17:32:21,2007,90,EEA Only,These are based on the EUCTR registration which is the only thing I have to go off of.,2007-003702-95
+10/28/2021 19:13:05,2006,161,EEA and Non-EEA,Combination of registry entries and publication,2005-005719-83
+10/30/2021 16:30:25,2006,42,EEA Only,Based on comparing article and registrations,2006-002022-29
+10/30/2021 16:41:02,2014,26,EEA Only,Taken from registries and registry document results,2014-001295-65
+10/30/2021 16:43:38,2010,958,EEA and Non-EEA,958 randomized,2009-016987-34
+10/30/2021 16:45:10,2012,101,EEA and Non-EEA,Agreement among all sources,2011-002329-23
+10/30/2021 16:49:02,2011,450,EEA and Non-EEA,"Start year and enrollment from ClinicalTrials.gov, location from examining both registries.",2011-005061-20
+10/30/2021 16:53:25,2014,1293,EEA and Non-EEA,Agreement among all sources,2013-005161-40
+10/30/2021 16:57:03,2011,133,EEA Only,Used EUCTR results as primary source here (difference in enrollment between sources). Appears 133 was ITT.,2010-023613-61
+10/30/2021 16:59:57,2011,134,EEA and Non-EEA,No results so based on comparison of EUCTR and ClinicalTrials.gov reg (CT.gov updated after completion).,2009-017918-69
+10/30/2021 17:07:18,2004,450,EEA Only,Based on best available information in the EUCTR registrations as no other information was available.,2004-001119-69
+10/30/2021 17:08:20,2010,48,EEA Only,Based on best available information in the EUCTR registrations as no other information was available.,2009-018245-21
+10/30/2021 17:14:22,2012,82,EEA Only,Agreement that 82 were randomized. EUCTR start date says 2011 but all other sources say April 2012.,2011-000721-77
+10/30/2021 17:26:57,2012,110,EEA Only,Enrollment and location cross-checked between all sources. 2012 start date between EUCTR registration and ISRCTN.,2011-005683-21
+10/30/2021 17:28:14,2012,60,EEA Only,Based on EUCTR registration as no other sources.,2012-001709-26
+10/31/2021 13:06:17,2010,30,EEA and Non-EEA,Agreement between sources,2010-018532-40
+10/31/2021 13:22:40,2014,30,EEA Only,Agreement between sources (table in paper appears to be incorrect and doesn't match the text),2014-001786-26
+10/31/2021 13:25:09,2012,5000,EEA Only,Based on EUCTR reg as no other source,2011-003325-10
+10/31/2021 13:27:36,2009,250,EEA Only,Article compared to EUCTR reg,2008-001892-31
+10/31/2021 13:33:03,2009,182,EEA and Non-EEA,"Start year from CT.gov, other from agreement between article and ct.gov.",2008-008604-40
+10/31/2021 13:42:06,2007,669,EEA and Non-EEA,Based on article/euctr doc compared to ct.gov entry,2007-000800-34
+10/31/2021 13:47:07,2006,90,EEA and Non-EEA,Agreement between sources,2005-004941-33
+10/31/2021 13:51:23,2012,596,EEA and Non-EEA,ITT  (i.e. randomized) is 596. Agreement between sources.,2012-004987-23
+10/31/2021 13:54:36,2008,12,EEA Only,Results on the EUCTR gave no pertinent details. Based on EUCTR registration.,2007-005242-21
+10/31/2021 13:59:03,2009,37,EEA Only,"Even though ClinicalTrials.gov says 27, article makes clear it's 27 assigned to one of the two treatments plus 10 healthy controls.",2008-005325-10
+10/31/2021 14:02:02,2012,616,EEA and Non-EEA,Agreement between sources,2011-006119-70
+10/31/2021 14:03:53,2007,9,EEA Only,From EUCTR document,2006-005034-20
+10/31/2021 16:04:07,2006,460,EEA Only,From EUCTR document and clinicaltrials.gov comparison,2005-004724-39
+10/31/2021 16:08:12,2016,27,EEA and Non-EEA,27 is ITT,2015-003639-37
+11/1/2021 15:54:32,2005,51,EEA Only,All from article,2004-004748-27
+11/1/2021 21:49:21,2009,5,EEA Only,Agreement between sources,2007-003885-16
+11/1/2021 21:51:40,2014,20,EEA Only,Based on agreement between registrations,2013-004593-95
+11/1/2021 21:54:16,2009,198,EEA and Non-EEA,Agreement between sources,2008-005025-11
+11/1/2021 22:00:30,2007,63,EEA Only,Based mostly on paper cross-checked with registries.,2005-000915-80
+11/1/2021 22:06:02,2006,123,EEA and Non-EEA,"Comparison between sources. Agreement on start year and enrollment, Location from affiliations and EUCTR.",2006-000666-37
+11/1/2021 22:11:21,2011,90,EEA Only,From paper compared to EUCTR entry,2009-017261-32
+11/1/2021 22:14:30,2010,25,EEA Only,Agreement between sources,2009-016733-10
+11/1/2021 22:23:34,2006,472,EEA and Non-EEA,Based on comparison of registrations. Clinicaltrials.gov updated after completion.,2006-006600-11
+11/1/2021 22:25:46,2015,58,EEA and Non-EEA,Agreement between registrations,2014-002986-30
+11/1/2021 22:27:26,2011,80,EEA Only,Based off comparison of registrations,2010-021593-11
+11/1/2021 22:30:30,2006,41,EEA Only,Based on EUCTR entry,2006-003821-10
+11/1/2021 22:41:33,2009,23,EEA Only,Agreement between sources,2008-002626-11
+11/1/2021 22:47:48,2008,459,EEA Only,Comparison between sources. 459 were randomized.,2007-003803-11
+11/1/2021 22:51:17,2013,126,EEA Only,Agreement between sources,2013-000621-30
+11/1/2021 22:59:39,2008,50,EEA Only,Comparison between registry entries,2008-005086-55
+11/1/2021 23:08:13,2005,45,EEA and Non-EEA,Agreement between sources,2004-005094-29
+11/3/2021 13:52:43,2009,50,EEA Only,Taken from EUCTR registration as no other sources,2009-011556-22
+11/3/2021 14:40:12,2013,243,EEA Only,Agreement between sources,2012-001956-20
+11/3/2021 14:51:15,2012,60,EEA Only,This one had some very odd linkages between records. Some things match the ISRCTN but I've preferred the EUCTR for start year.,2012-002418-38
+11/3/2021 14:52:37,2007,29,EEA Only,Based on what was available in EUCTR entry,2007-000998-30
+11/3/2021 14:54:37,2014,9,EEA Only,Used the recently updated information on ClinicalTrials.gov,2013-000850-23
+11/3/2021 14:57:43,2010,100,EEA Only,Agreement between sources,2010-019268-35
+11/3/2021 15:13:01,2008,17,EEA Only,Mainly from article,2006-006146-34
+11/3/2021 15:15:49,2012,94,EEA Only,"Enrollment based on article, agreement on everything else",2011-005622-21
+11/3/2021 15:19:30,2014,3,EEA Only,Cross-referencing article and EUCTR reg,2013-005594-51
+11/3/2021 15:20:36,2009,30,EEA Only,Based on EUCTR reg,2009-011279-56
+11/3/2021 15:23:18,2008,54,EEA and Non-EEA,Agreement between sources,2007-002171-13
+11/3/2021 15:26:54,2016,1,EEA Only,From EUCTR entry and results,2016-000867-18
+11/3/2021 18:40:10,2012,39,EEA Only,Agreement between sources.,2011-001725-24
+11/3/2021 18:41:38,2014,298,EEA and Non-EEA,Agreement between sources,2014-003135-19
+11/3/2021 18:45:24,2013,619,EEA and Non-EEA,Agreement between sources (EUCTR says 621 but started = 619 which seems to be what we want).,2013-002997-33
+11/3/2021 18:48:16,2013,36,EEA and Non-EEA,Agreement between sources,2013-001557-27
+11/3/2021 18:52:11,2006,80,EEA Only,Agreement between sources,2005-001578-28
+11/4/2021 9:57:18,2010,8,EEA Only,From EUCTR results document,2009-016360-37
+11/4/2021 10:02:48,2008,563,EEA Only,Mainly using the two papers located compared to EUCTR entry.,2007-000212-89
+11/4/2021 10:06:30,2007,519,EEA and Non-EEA,Agreement between sources.,2006-004610-41
+11/4/2021 10:09:08,2003,1667,EEA and Non-EEA,Agreement between sources,2004-002241-12
+11/4/2021 13:32:46,2014,41,EEA and Non-EEA,Agreement between sources,2014-000042-30
+11/4/2021 13:35:17,2013,13,EEA Only,Agreement between sources,2011-004559-38
+11/4/2021 13:38:52,2008,83,EEA and Non-EEA,Agreement between sources,2007-005702-49
+11/4/2021 17:39:11,2014,34,EEA Only,Agreement between sources,2013-002154-67
+11/4/2021 17:41:06,2014,51,EEA and Non-EEA,Agreement for everything but enrollment but used EUCTR for enrollment (small discrepancy with CT.gov).,2014-002841-23
+11/4/2021 17:44:18,2004,440,EEA and Non-EEA,Agreement between sources,2004-001376-39
+11/4/2021 17:48:09,2009,59,EEA Only,Based mainly on paper as most recent account of trial,2010-018448-15
+11/4/2021 17:50:12,2011,80,EEA Only,Agreement between sources,2010-021150-19
+11/4/2021 17:53:02,2011,852,EEA and Non-EEA,Agreement between sources,2011-003832-30
+11/4/2021 18:07:53,2011,317,EEA Only,I think there's a typo on the EUCTR for start year (should be 2011 not 2012) based on paper and Clinicaltrials.gov. Enrollment is 3017 randomized in article (ITT) and agreement on UK location.,2010-023198-21
+11/4/2021 18:15:53,2006,24,EEA Only,Comparing sources but enrollment taken from ClinicalTrials.gov as more recent update.,2005-003783-27
+11/4/2021 18:20:32,2004,199,EEA Only,Agreement between sources,2004-000414-39
+11/4/2021 18:23:02,2007,68,EEA Only,Based on paper cross-checked with EUCTR,2006-005565-18
+11/4/2021 21:57:42,2012,10,EEA Only,Agreement between sources,2011-004355-40
+11/4/2021 22:01:35,2005,183,EEA and Non-EEA,Agreement between sources,2004-000368-28
+11/4/2021 22:03:38,2013,100,EEA Only,Numbers from EUCTR registration,2011-006179-20
+11/4/2021 22:08:49,2007,214,EEA and Non-EEA,"Agreement between sources. Paper states 214 were actually randomized (212 were ""exposed"" which is what the registry is referring to).",2006-005579-16
+11/4/2021 22:14:11,2012,87,Non-EEA,Agreement between sources,2015-003537-99
+11/4/2021 22:16:14,2012,21,EEA Only,Agreement between registrations,2012-003516-31
+11/4/2021 22:17:51,2012,700,EEA Only,Based on just the EUCTR entry,2011-005366-38
+11/4/2021 22:21:55,2013,50,EEA Only,Agreement between sources,2013-002165-19
+11/4/2021 22:25:02,2016,532,EEA and Non-EEA,Agreement between sources,2015-004768-12
+11/4/2021 22:29:03,2005,180,EEA and Non-EEA,"Start year from CT.gov compared to EUCTR approval dates, enrollment (randomized) from article, location from EUCTR with additional info from article.",2005-000346-36
+11/4/2021 22:30:11,2008,100,EEA Only,From EUCTR registration,2008-003592-48
+11/4/2021 22:32:48,2010,10,EEA Only,Mainly from ClinicalTrials.gov entry (updated after completion),2008-006794-32
+11/4/2021 22:48:21,2012,18,EEA Only,Agreement between sources,2012-000363-24
+11/4/2021 22:53:18,2014,62,EEA Only,Agreement between sources,2013-003363-64
+11/4/2021 22:56:44,2011,24,EEA Only,Agreement between sources,2011-000125-76
+11/4/2021 23:01:42,2007,78,EEA Only,Agreement between sources,2006-005263-26
+11/4/2021 23:28:46,2014,130,EEA and Non-EEA,Agreement between EUCTR results and located CSR,2013-003000-39
+11/4/2021 23:32:35,2011,37,EEA Only,Agreement between sources,2010-024108-84
+11/4/2021 23:34:52,2009,40,EEA Only,"enrollment from CT.gov, everything else from agreement",2008-003829-16
+11/4/2021 23:37:21,2016,24,Non-EEA,Agreement between sources,2014-004454-34
+11/4/2021 23:47:24,2008,92,EEA Only,Primarily from article compared to EUCTR entry,2007-007072-42
+11/4/2021 23:49:33,2006,67,EEA Only,General agreement between sources (translated certain phrases from German CSR),2006-000585-36
+11/4/2021 23:52:56,2009,50,EEA Only,General agreement between sources,2008-006135-12
+11/4/2021 23:59:06,2014,80,EEA and Non-EEA,Agreement between sources,2014-001644-38
+11/5/2021 0:03:18,2009,2044,EEA Only,From EUCTR CSR,2009-010112-15
+11/5/2021 0:04:19,2009,48,EEA Only,EUCTR entry only,2009-012658-19
+11/5/2021 0:06:08,2016,50,EEA and Non-EEA,Agreement between registry entries,2015-002396-18
+11/5/2021 0:07:17,2012,250,EEA Only,EUCTR entry only,2012-001515-22
+11/5/2021 0:08:29,2009,50,EEA Only,EUCTR entry only,2008-005549-46
+11/5/2021 0:11:43,2013,152,EEA and Non-EEA,Using data primarily from article,2013-000583-29
+11/5/2021 1:02:19,2012,40,EEA Only,EUCTR entry only,2011-003560-74
+11/5/2021 10:47:53,2016,11,EEA and Non-EEA,Agreement between sources,2015-002191-25
+11/5/2021 10:49:47,2007,805,EEA and Non-EEA,Mostly based on ClinicalTrials.gov,2007-001005-16
+11/5/2021 10:50:55,2010,220,EEA Only,Based on EUCTR,2010-020521-40
+11/5/2021 10:54:18,2012,91,EEA Only,Mainly based on paper,2011-001756-12
+11/5/2021 10:59:53,2014,146,EEA Only,Agreement between sources,2013-001868-40
+11/5/2021 11:12:13,2007,136,EEA Only,Agreement between sources,2006-005380-25
+11/5/2021 11:14:18,2009,219,EEA Only,Agreement between sources,2009-009858-24
+11/5/2021 11:16:24,2010,16,EEA Only,Agreement between sources,2010-019094-15
+11/5/2021 11:18:28,2006,41,EEA and Non-EEA,General agreement between sources,2007-004805-80
+11/5/2021 11:20:37,2006,98,EEA Only,Agreement between sources,2006-003191-35
+11/5/2021 11:22:37,2006,20,EEA Only,Agreement between sources,2005-005443-26
+11/5/2021 11:24:56,2008,246,EEA and Non-EEA,Agreement between sources,2008-004429-41
+11/5/2021 11:28:50,2011,330,EEA Only,Based on EUCTR results,2011-003317-41
+11/5/2021 11:42:01,2008,11,EEA Only,"Agreement between updated sources (ct.gov, article)",2007-000974-22
+11/5/2021 12:39:29,2012,6,EEA Only,Based on EUCTR entry,2012-000869-21
+11/5/2021 12:52:43,2008,138,EEA Only,"Since Monaco is administered by france, I'm not picking-nits about this being non-EEA",2007-004483-41
+11/5/2021 12:55:05,2006,284,EEA Only,Agreement between sources,2005-005827-32
+11/5/2021 12:57:19,2005,60,EEA Only,60 appears to be ITT but 58 was analysed. Otherwise agreement.,2004-001614-13
+11/7/2021 21:33:40,2010,22,EEA Only,Agreement between sources,2009-016760-36
+11/7/2021 21:43:55,2012,66,EEA Only,Agreement between sources,2012-002278-30
+11/8/2021 18:51:53,2010,93,EEA Only,From EUCTR results cross-reffed with CT.gov,2010-018945-72
+11/8/2021 18:53:42,2013,60,EEA Only,Cross-checking the registry entries,2011-006331-35
+11/8/2021 19:33:12,2016,40,EEA Only,Agreement between sources,2015-002706-36
+11/8/2021 19:48:46,2013,40,EEA Only,Agreement between sources,2012-004938-42
+11/8/2021 19:50:08,2012,800,EEA and Non-EEA,Agreement between sources,2012-000109-66
+11/8/2021 19:52:12,2005,19,EEA Only,Agreement between registries,2005-000841-12
+11/8/2021 19:55:39,2016,56,EEA Only,Based mainly on paper cross-referenced with registries,2013-003873-85
+11/8/2021 19:56:52,2016,7,EEA and Non-EEA,Agreement between registries,2014-004972-49
+11/8/2021 20:00:32,2013,515,EEA and Non-EEA,Agreement between sources,2012-002806-31
+11/8/2021 20:02:42,2006,30,EEA Only,Taken from EUCTR entry. Location is best guess because no information available.,2005-005544-79
+11/8/2021 20:08:09,2007,170,EEA and Non-EEA,"Agreement on location, enrollment matches between ct.gov and paper, start year from ct.gov and matches European approvals",2007-002383-95
+11/8/2021 20:13:45,2005,77,Non-EEA,"The paper makes clear that the extension phase (this registration) actually had no EEA locations. ""The blinded extension was a double-blind, placebo-controlled 40-week study (A7501009; NCT00145509) conducted at 53 of the original 74 sites in Australia, India, Korea, Russia, Thailand, and the United States between June 2005 and November 2007.""",2005-001472-12
+11/8/2021 20:16:41,2012,459,EEA and Non-EEA,EUCTR results cross-reffed with other sources.,2012-003110-14
+11/8/2021 20:18:41,2012,121,EEA and Non-EEA,Agreement between sources,2011-006121-26
+11/8/2021 20:21:38,2011,1663,EEA and Non-EEA,Agreement between sources,2010-021560-15
+11/8/2021 20:29:47,2011,41,EEA Only,Based on EUCTR entry,2011-003509-65
+11/8/2021 20:36:30,2006,126,EEA Only,Agreement between sources,2004-002547-27
+11/8/2021 20:42:50,2012,38,Non-EEA,"Despite EUCTR registration, no enrollment reported in the EU (EUCTR results and CT.gov). Results on EUCTR informed the responses above.",2011-000947-26
+11/8/2021 20:44:52,2009,22,EEA Only,Agreement between registries,2008-003839-20
+11/8/2021 20:47:29,2015,132,EEA and Non-EEA,Agreement between sources.,2014-001096-31
+11/8/2021 20:51:05,2013,155,EEA Only,Final info from paper compared to EUCTR entry,2012-005332-29
+11/8/2021 21:05:01,2008,30,EEA and Non-EEA,Agreement between sources,2007-004671-19
+11/10/2021 13:34:36,2011,15,EEA Only,"Location consistent, enrollment from ct.gov and paper, year from ct.gov x-ref with euctr",2010-022812-37
+11/10/2021 13:38:29,2010,35,EEA and Non-EEA,Agreement between sources,2009-015681-55
+11/10/2021 13:41:28,2010,355,EEA Only,Results in doctoral thesis had actual detail on enrollment etc.,2009-012596-94
+11/10/2021 13:53:40,2014,468,EEA and Non-EEA,Agreement between sources,2013-005464-25
+11/10/2021 13:55:28,2012,1,EEA Only,Agreement between sources,2011-000056-42
+11/10/2021 13:57:01,2009,140,EEA Only,Agreement between registrations,2008-003832-40
+11/10/2021 13:58:41,2014,40,EEA Only,From EUCTR reg only source,2013-004042-42
+11/10/2021 14:14:53,2012,185,EEA and Non-EEA,Agreement between sources,2011-003574-84
+11/10/2021 14:24:58,2007,437,EEA Only,Agreement between sources,2006-003940-50
+11/10/2021 14:27:56,2008,169,EEA and Non-EEA,Agreement between sources,2008-003327-23
+11/10/2021 14:31:01,2008,101,EEA Only,Agreement between sources,2008-002134-29
+11/10/2021 14:32:50,2008,14,EEA Only,Agreement between registrations,2007-006648-23
+11/10/2021 14:35:31,2012,2157,EEA and Non-EEA,Agreement between sources (mainly paper and ct.gov),2012-001249-41
+11/10/2021 14:42:12,2007,154,EEA Only,Agreement between sources,2006-006739-36
+11/10/2021 14:44:20,2008,3,EEA Only,Mainly from EUCTR entry cross-checked with ISRCTN,2007-004226-25
+11/10/2021 14:46:44,2006,363,EEA and Non-EEA,Mainly from EUCTR results document cross-checked with registries,2006-002590-44
+11/10/2021 14:47:50,2011,38,EEA Only,From euctr reg,2010-023602-12
+11/10/2021 14:48:50,2012,40,EEA Only,From EUCTR reg,2011-000811-23
+11/10/2021 14:52:07,2005,36,EEA and Non-EEA,Agreement between sources,2005-000705-59
+11/10/2021 14:54:23,2013,17,EEA Only,Agreement between sources,2013-001103-36
+11/10/2021 14:55:56,2011,36,EEA Only,Agreement between registrations,2010-023533-34
+11/10/2021 14:56:45,2013,90,EEA Only,From EUCTR reg,2011-006162-40
+11/10/2021 14:58:23,2008,219,EEA and Non-EEA,Agreement between sources,2008-000743-34
+11/10/2021 15:04:53,2010,609,EEA and Non-EEA,"Paper said recruitment started Jan 2011, but preferred EUCTR date (late 2010).",2010-020126-17
+11/10/2021 15:06:37,2015,11,EEA and Non-EEA,Agreement between registrations,2015-000159-26
+11/10/2021 15:08:40,2008,90,EEA Only,Based on EUCTR registration. Took latest approval date (2008),2006-002275-40
+11/10/2021 15:09:51,2012,37,EEA Only,From EUCTR reg,2010-024446-30
+11/10/2021 15:14:14,2012,38,EEA Only,Agreement between sources,2012-003137-41
+11/10/2021 15:16:27,2011,236,EEA and Non-EEA,Agreement between sources,2011-001483-21
+11/10/2021 15:19:37,2008,260,EEA and Non-EEA,Agreement between sources,2007-002125-68
+11/10/2021 15:21:43,2006,1771,EEA and Non-EEA,Agreement between sources,2006-002791-18
+11/10/2021 15:22:39,2006,30,EEA Only,From EUCTR reg,2005-005469-12
+11/10/2021 15:24:50,2010,29,EEA and Non-EEA,Agreement between sources,2009-013165-25
+11/10/2021 15:26:24,2013,142,EEA Only,Agreement between sources,2013-000639-29
+11/10/2021 15:29:18,2008,19,EEA Only,Agreement between sources,2008-000121-19
+11/10/2021 15:30:02,2015,10,EEA Only,From EUCTR reg - only source,2013-000024-34
+11/10/2021 15:39:05,2008,35,EEA Only,Mostly agreement between sources. EUCTR results doc and paper are clear enrollment was 35.,2008-005319-16
+11/10/2021 15:42:18,2014,269,EEA Only,"Mainly from more recently updated CT.gov reg, cross-checked with EUCTR",2013-001229-15
+11/10/2021 15:44:24,2018,164,EEA and Non-EEA,From EUCTR reg no other source,2017-005115-13
+11/10/2021 15:51:45,2008,389,EEA and Non-EEA,Agreement between sources,2007-006168-31
+11/10/2021 15:55:48,2015,255,EEA and Non-EEA,Used latest approval date recorded. Used the most common enrollment figure (255). EUCTR reg states it's EEA and non-EEA,2010-021091-28
+11/10/2021 15:57:20,2008,18,EEA Only,Agreement between reg,2007-004675-19
+11/10/2021 15:59:38,2008,43,EEA and Non-EEA,Compared reg and used conference abstract with clear match to reg,2007-001746-40
+11/10/2021 16:03:45,2013,89,EEA Only,"The registry results are more complete than the paper (which reports 3, not all 4 groups). Enrollment reflects full results on registry.",2012-005232-29
+11/10/2021 16:07:06,2005,111,EEA and Non-EEA,Mainly from paper compared to reg entries.,2004-000442-21
+11/10/2021 21:54:54,2006,77,EEA Only,Based on EUCRT reg,2006-003340-33
+11/10/2021 21:57:51,2009,258,EEA Only,Agreement between sources,2007-003986-42
+11/10/2021 22:01:34,2013,1068,EEA and Non-EEA,Agreement between sources,2013-000176-15
+11/10/2021 22:04:54,2005,229,EEA Only,EUCTR Results,2005-000508-15
+11/10/2021 22:06:14,2015,96,EEA Only,Agreement between registrations,2014-003790-41
+11/10/2021 22:08:14,2015,30,EEA Only,General agreement between registries. Used enrollment from Ct.gov as updated after completion.,2014-003846-29
+11/10/2021 22:14:29,2014,27,EEA Only,Based mainly on the EUCTR results.,2012-005796-14
+11/10/2021 22:17:45,2009,25,Non-EEA,Agreement between sources,2017-001607-80
+11/10/2021 22:23:45,2008,10,EEA Only,Article cross-checked with reg,2007-007958-54
+11/10/2021 22:25:22,2016,18,EEA Only,Agreement between sources,2015-000458-40
+11/10/2021 22:27:13,2013,323,EEA and Non-EEA,Agreement between sources,2011-004886-34
+11/10/2021 22:29:22,2012,93,EEA and Non-EEA,EUCTR results say 2011 for year but other two sources say 2012 so over-rules. Otherwise agreement.,2010-024557-36
+11/10/2021 22:36:01,2004,105,EEA and Non-EEA,"Since the trial included multiple parts in multiple publications, I used the final enrollment and start date as updated on ClinicalTrials.gov",2004-004340-42
+11/10/2021 22:38:10,2008,19,EEA Only,Mainly from EUCTR results doc,2007-000502-70
+11/10/2021 22:40:22,2016,185,EEA and Non-EEA,"Agreement on date and enrollment, EUCTR results for location",2015-003625-34
+11/10/2021 22:43:06,2004,36,EEA Only,"Article for enrollment, match on location, latest approval for year",2004-001098-25
+11/10/2021 22:44:39,2010,24,EEA Only,ClinicalTrials.gov entry updated in same month as completion so used enrollment from there.,2010-021438-68
+11/10/2021 22:48:16,2012,602,EEA and Non-EEA,Used 602 as the ITT number as paper and EUCTR overrule Ct.gov (605),2011-004237-14
+11/10/2021 22:50:08,2006,30,EEA Only,Agreement between sources,2006-000845-21
+11/10/2021 22:52:16,2010,934,EEA and Non-EEA,Agreement,2009-018172-33
+11/10/2021 22:54:42,2010,34,EEA Only,Mainly taken from paper as most final source,2008-008211-26
+11/10/2021 22:57:32,2009,116,EEA and Non-EEA,Enrollment matched from ct.gov to abstract. Other match.,2008-007649-30
+11/10/2021 23:00:09,2007,247,EEA and Non-EEA,Agreement between sources,2007-003912-72
+11/11/2021 15:00:43,2006,445,EEA and Non-EEA,Agreement between sources,2006-000419-90
+11/11/2021 15:03:30,2009,165,EEA and Non-EEA,Used EUCTR results for recruitment date as more recent than last ClinicalTrials.gov update. Otherwise agreement.,2008-004849-28
+11/11/2021 15:16:53,2013,468,EEA and Non-EEA,Agreement,2013-003587-31
+11/11/2021 15:21:52,2014,34,EEA Only,Agreement between sources.,2014-000340-15
+11/11/2021 15:24:16,2008,128,EEA Only,Agreement between sources,2007-005365-35
+11/11/2021 15:25:31,2011,15,EEA Only,Mainly from EUCTR results x-checked with CT.gov reg,2008-004499-38
+11/11/2021 15:28:11,2009,20,EEA Only,Generally based on EUCTR results doc cross-reffed with paper.,2008-001835-36
+11/11/2021 15:29:09,2009,9,Non-EEA,Agreement between sources,2008-006866-27
+11/11/2021 15:31:53,2007,196,EEA Only,Agreement,2006-004350-25
+11/11/2021 18:00:57,2008,100,EEA Only,From EUCTR reg,2007-006776-11
+11/11/2021 19:39:42,2015,32,EEA and Non-EEA,Agreement between sources,2014-003896-41
+11/11/2021 19:42:01,2011,58,EEA Only,Agreement between sources,2010-020973-18
+11/11/2021 19:43:53,2013,81,EEA Only,Based enrollment on paper as most complete info source,2012-005048-46
+11/11/2021 19:46:55,2010,40,EEA Only,Based mainly on publication. Year based on final approvals.,2010-021384-33
+11/11/2021 19:48:30,2010,8,EEA and Non-EEA,Agreement between sources,2009-013222-16
+11/11/2021 19:50:54,2010,303,EEA and Non-EEA,Agreement,2009-011564-11
+11/11/2021 19:58:25,2005,16,EEA Only,Agreement. Year from latest approval.,2005-003077-25
+11/11/2021 21:01:40,2014,27,EEA Only,27 were actually randomized,2012-005627-32
+11/11/2021 21:04:25,2008,31,EEA Only,Agreement between sources,2006-005238-19
+11/11/2021 21:07:51,2010,233,EEA and Non-EEA,Mainly from article cross-ref with euctr reg,2009-014455-68
+11/11/2021 21:23:39,2005,165,EEA Only,Agreement,2004-004707-38
+11/11/2021 21:27:33,2005,617,EEA and Non-EEA,Based mainly on EUCTR results and article,2004-000996-33
+11/11/2021 21:29:28,2014,31,EEA Only,Agreement,2013-002850-54
+11/11/2021 21:35:49,2006,90,EEA Only,Agreement,2005-004124-39
+11/11/2021 21:43:00,2008,30,EEA Only,EUCTR reg only source,2008-000787-16
+11/12/2021 18:18:28,2007,154,EEA and Non-EEA,Combining info from all sources,2007-003655-36
+11/12/2021 18:21:43,2008,399,EEA Only,Randomized enrollment from flow chart in paper. Agreement otherwise.,2007-004139-49
+11/12/2021 18:26:33,2015,121,EEA and Non-EEA,Agreement between sources. Registries include 6 extra non-randomized subjects plus the 115 randomized for 121.,2014-005477-37
+11/12/2021 18:27:40,2009,50,EEA Only,EUCTR reg only,2005-005216-24
+11/12/2021 19:01:26,2010,71,EEA Only,The EUCTR entry for this now contains 2 results documents. One outlining some details but not results and a paper that is clearly not the trial described. The document has some information (like enrollment) and the other info was taken from the registration.,2009-009056-20
+11/14/2021 11:35:02,2004,54,EEA and Non-EEA,Mainly from paper cross-reffed with EUCTR reg,2004-000753-30
+11/14/2021 11:37:24,2015,44,EEA and Non-EEA,Agreement between sources,2015-003696-30
+11/14/2021 11:47:49,2010,87,EEA and Non-EEA,Agreement,2010-021217-23
+11/14/2021 11:49:11,2014,20,EEA Only,From EUCTR entry only source,2010-024119-15
+11/14/2021 11:51:49,2015,80,EEA Only,Agreement,2014-000177-39
+11/14/2021 11:54:10,2008,44,EEA and Non-EEA,Agreement,2008-000725-18
+11/14/2021 11:57:03,2007,53,EEA Only,Mainly from article cross-reffed with euctr entry,2007-003461-41
+11/14/2021 12:02:07,2013,34,Non-EEA,"Mainly from article. While Estonia protoocol registerd on EUCTR, no reported enrollment in Estonia in results, only US.",2013-003227-11
+11/14/2021 12:04:28,2012,42,EEA Only,Agreement,2011-005461-21
+11/14/2021 12:07:26,2010,240,EEA Only,From paper cross-reffed with EUCTR entry,2010-019913-12
+11/14/2021 12:09:18,2008,390,EEA and Non-EEA,Agreement,2007-006033-14
+11/14/2021 12:14:04,2005,100,EEA Only,Agreement between registrations.,2005-001191-12
+11/14/2021 12:16:19,2006,18,EEA Only,Agreement between registrations,2005-004128-38
+11/14/2021 12:18:02,2011,241,EEA and Non-EEA,Agreement,2007-000180-13
+11/14/2021 12:20:31,2007,90,EEA Only,Agreement,2006-002787-26
+11/14/2021 12:23:27,2010,252,EEA Only,Agreement,2010-020168-39
+11/14/2021 12:25:13,2005,36,EEA Only,EUCTR results doc,2005-001384-60
+11/14/2021 12:27:23,2010,61,EEA Only,Agreement,2009-017752-28
+11/15/2021 23:59:58,2006,111,EEA Only,Agreement,2005-002233-12
+11/16/2021 0:02:43,2010,51,EEA Only,51 enrolled. Agreement otherwise.,2009-017831-16
+11/16/2021 0:09:02,2009,2148,EEA Only,EUCTR reg only source.,2008-004387-39
+11/16/2021 10:18:05,2010,190,EEA and Non-EEA,General agreement (enrollment based on registries),2009-018097-64
+11/16/2021 10:20:19,2004,57,EEA Only,Agreement,2004-003755-39
+11/16/2021 10:22:06,2014,467,EEA and Non-EEA,Agreement,2013-004654-13
+11/16/2021 10:23:38,2008,465,EEA and Non-EEA,General agreement. Defaulted to EUCTR for slight discrepancy in enrollment (1 pt),2008-000718-63
+11/16/2021 10:26:36,2008,32,EEA and Non-EEA,From EUCTR results cross-reffed with ct.gov. 31 Seems to be amount actually randomized.,2007-003481-18
+11/16/2021 17:59:51,2015,658,EEA and Non-EEA,Agreement,2014-001759-22
+11/16/2021 18:08:15,2015,240,EEA and Non-EEA,Agreement,2014-003558-15
+11/16/2021 18:10:09,2005,201,EEA Only,Agreement,2004-005135-26
+11/17/2021 12:43:48,2016,84,EEA Only,ISRCTN results confirm 84 randomized. 76 was just analysis pop.,2016-002210-46
+11/17/2021 12:45:00,2016,44,EEA Only,EUCTR results,2014-005556-25
+11/17/2021 12:48:19,2011,140,EEA Only,Preferring 2011 date in more recent EUCTR results than in paper (2012),2011-004498-96
+11/17/2021 12:53:00,2008,61,EEA Only,Agreement,2007-003767-51
+11/17/2021 12:56:24,2014,20,EEA Only,"Going with paper for enrollment as has most detailed information on the topic (no EUCTR results, ClinicalTrials.gov says 36)",2013-005062-19
+11/17/2021 12:59:09,2009,496,EEA and Non-EEA,496 is number randomized (compared to 551 enrolled). Agreement.,2008-007167-16
+11/17/2021 13:00:43,2016,22,EEA Only,Agreement,2016-001638-84
+11/17/2021 13:02:07,2007,1847,EEA and Non-EEA,Agreement,2006-004942-18
+11/17/2021 13:22:43,2009,19,EEA Only,Best guess on enrollment based mainly on ClinicalTrials.gov and cross-referencing with the study design publication.,2008-005451-23
+11/17/2021 13:25:48,2010,1022,EEA and Non-EEA,Agreement,2009-013552-72
+11/17/2021 13:28:35,2015,32,EEA and Non-EEA,Agreement,2014-004751-31
+11/17/2021 13:30:51,2011,35,EEA Only,Based mainly on article and date of final approval on EUCTR reg,2011-003654-40
+11/17/2021 13:31:59,2009,40,EEA Only,EUCTR reg only source,2009-012102-39
+11/17/2021 15:00:23,2007,123,EEA and Non-EEA,Agreement,2006-006946-32
+11/17/2021 15:02:24,2010,65,EEA and Non-EEA,Agreement,2009-016383-36
+11/17/2021 15:03:55,2007,504,EEA and Non-EEA,Agreement,2006-005804-15
+11/17/2021 15:07:48,2005,178,EEA Only,Agreement,2005-002950-23
+11/17/2021 18:06:50,2006,70,EEA and Non-EEA,Agreement,2006-005746-36
+11/17/2021 18:10:10,2004,133,EEA Only,Recruitment locations were Hungary and Germany per paper and EUCTR results. 133 is randomized.,2004-000186-35
+11/17/2021 18:13:20,2007,5,EEA Only,Agreement. Enrollment from EUCTR results.,2006-006426-26
+11/17/2021 18:37:42,2011,100,EEA Only,Best info comparing registrations and potential abstract,2011-000401-50
+11/17/2021 18:40:51,2009,55,EEA and Non-EEA,"From paper and approvals, 2009 seems much more rationale of a start date than 2004 on CT.gov. ",2009-017449-72
+11/17/2021 18:45:03,2011,56,EEA Only,Agreement between EUCTR reg and paper,2011-000197-53
+11/17/2021 18:47:22,2010,198,EEA and Non-EEA,Agreement,2011-002268-26
+11/17/2021 18:49:47,2012,35,EEA Only,Agreement. For start year perferring euctr results over clincialtrials.gov as more recent,2012-001570-29
+11/17/2021 18:53:26,2005,53,EEA and Non-EEA,Agreement,2005-000561-18
+11/17/2021 19:02:51,2008,127,EEA Only,Based mainly on CT.gov cross-reffed with EUCTR reg,2007-005757-28
+11/17/2021 19:04:36,2007,102,EEA Only,Based on CT.gov reg cross-reffed with EUCTR,2007-000515-29
+11/17/2021 19:05:57,2011,7,EEA and Non-EEA,Mainly from CT.gov,2011-000774-58
+11/17/2021 19:07:06,2009,24,EEA Only,Based on EUCTR reg only source,2008-007238-23
+11/17/2021 23:04:05,2007,40,EEA Only,No much but two outdated registries. Used EUCTR info.,2007-000214-37
+11/17/2021 23:04:53,2009,30,EEA Only,EUCTR reg only,2009-014670-17
+11/17/2021 23:19:41,2009,50,EEA Only,EUCTR reg only,2009-010549-30
+11/17/2021 23:21:23,2013,270,EEA Only,Agreement between registries,2013-001421-55
+11/17/2021 23:25:00,2007,30,EEA Only,EUCTR reg only,2007-007787-25
+11/17/2021 23:26:35,2013,10,EEA Only,EUCTR reg only,2013-004562-33
+11/17/2021 23:30:31,2006,178,EEA Only,Based mostly on publication compared to registries,2005-005981-35
+11/17/2021 23:34:13,2013,19,EEA Only,EUCTR results,2012-004368-23
+11/17/2021 23:36:57,2005,43,EEA Only,Agreement,2005-001502-11
+11/17/2021 23:40:23,2006,31,EEA Only,Agreement b/w article and EUCTR on enrollment. Everything else agrement.,2005-003740-62
+11/17/2021 23:47:55,2014,40,EEA Only,Used article for enrollment (1 off from CT.gov). Agreement otherwise.,2013-002183-63
+11/17/2021 23:50:22,2013,494,EEA and Non-EEA,Agreement,2013-003660-31
+11/17/2021 23:54:03,2008,64,EEA and Non-EEA,Based mainly on ClinicalTrials.gov,2007-007940-92
+11/17/2021 23:55:00,2016,51,EEA Only,EUCTR results,2014-001158-41
+11/18/2021 0:01:00,2007,38,EEA Only,Relying mainly on results abstract located and ISRCTN,2006-000945-20
+11/18/2021 0:04:47,2006,126,EEA Only,Mainly based on paper (compared to recently submitted EUCTR results doc),2005-000786-19
+11/18/2021 0:26:40,2011,75,EEA Only,Used registry numbers as consistent. Can't confirm abstract is same study but similar numbers anyway (80 vs 75).,2010-019591-67
+11/18/2021 0:28:34,2014,405,EEA and Non-EEA,Agreement,2013-000536-10
+11/18/2021 0:32:04,2017,29,EEA and Non-EEA,Agreement,2017-001373-16
+11/18/2021 0:41:32,2013,65,EEA Only,65 randomized. Agreement otherwise,2013-000056-18
+11/18/2021 0:42:45,2007,60,EEA Only,EUCTR reg only,2006-006583-35
+11/18/2021 0:47:46,2005,63,Non-EEA,"Based on the article (with a confirmed link to registration) while the study involved Finnish researchers, recruitment only took place in South Africa.",2005-003071-20
+11/18/2021 0:50:30,2008,110,EEA Only,EUCTR reg only,2008-002131-32
+11/18/2021 0:51:58,2007,256,EEA and Non-EEA,Agreement,2006-003485-33
+11/18/2021 0:53:52,2009,396,EEA Only,Agreement,2007-003103-12
+11/18/2021 0:55:52,2008,60,EEA Only,Agreement,2008-003575-47
+11/18/2021 0:56:57,2005,62,EEA Only,EUCTR reg only,2005-001245-41
+11/18/2021 1:01:21,2012,3127,EEA Only,Agreement,2011-005616-29
+11/18/2021 1:06:40,2008,18,EEA Only,Enrollment for Phase 1 and 2 from article. ,2008-001842-19
+11/18/2021 1:24:25,2007,8,EEA and Non-EEA,Agreement,2007-000710-37
+11/18/2021 12:10:03,2006,800,EEA and Non-EEA,Agreement between registrations,2006-000654-43
+11/18/2021 12:11:48,2006,357,Non-EEA,Agreement. Paper confirmed 1 more participant randomized,2016-004944-12
+11/18/2021 13:01:27,2011,6,EEA Only,Agreement between updated sources,2009-010186-23
+11/18/2021 13:03:14,2014,1063,EEA and Non-EEA,EUCTR results x-reffed with CTG,2013-002451-15
+11/18/2021 13:04:00,2011,40,EEA Only,Agreement,2009-014441-93
+11/18/2021 13:06:52,2010,73,Non-EEA,Agreement,2014-004335-39
+11/18/2021 13:08:28,2006,47,EEA Only,Agreement (47 randomized in EUCTR results doc 1 off from CTG),2006-002060-26
+11/18/2021 13:13:53,2007,755,EEA and Non-EEA,Agreement,2006-003087-59
+11/18/2021 13:21:56,2010,5,EEA Only,"These results were presented together with 2 other similar studies but the French arm, what is registered here (separately from the others), had 5 people in it. Agreement about this throughout.",2008-002380-14
+11/18/2021 13:43:08,2008,59,EEA Only,Agreement,2008-008359-40
+11/18/2021 13:49:59,2012,772,EEA and Non-EEA,Agreement between CTG and article,2012-002255-42
+11/18/2021 13:52:48,2010,1195,EEA and Non-EEA,Agreement,2010-018283-16
+11/18/2021 13:54:51,2012,194,EEA and Non-EEA,Agreement,2012-002669-37
+11/18/2021 14:05:17,2006,78,EEA Only,Agreement,2005-005532-27
+11/18/2021 14:06:50,2011,1735,EEA and Non-EEA,Agreement,2011-002453-65
+11/18/2021 14:08:57,2009,66,EEA Only,Agreement. Start year in paper.,2008-007987-40
+11/18/2021 14:12:21,2006,103,EEA Only,103 is randomized from paper. Agreement otherwise.,2005-003555-13
+11/18/2021 14:15:29,2004,165,EEA Only,Agreement,2004-003797-28
+11/18/2021 14:16:40,2014,8,EEA Only,Agreement between reg,2013-003328-35
+11/18/2021 14:18:23,2006,143,EEA Only,agreement,2005-000662-39
+11/18/2021 14:21:24,2016,1102,EEA and Non-EEA,Agreement,2015-002898-37
+11/18/2021 14:27:44,2009,51,EEA Only,Mainly from paper cross-reffed with euctr entry,2008-008749-39
+11/18/2021 14:32:05,2012,84,EEA and Non-EEA,Mainly from EUCTR results compared to other sources.,2012-001125-27
+11/18/2021 14:33:21,2006,100,EEA Only,Based on EUCTR reg only source,2006-000978-68
+11/18/2021 15:22:29,2013,43,EEA Only,Agreement where info available,2012-004300-35
+11/18/2021 15:24:38,2009,12,EEA Only,2009 latest approval. 12 is pts actually enrolled from paper. ,2009-011165-85
+11/18/2021 15:27:10,2012,201,EEA Only,"While they wanted 100 participats for Phase 2, 201 actually entered in Phase 1",2012-001809-24
+11/18/2021 15:29:03,2009,656,EEA Only,Agreement,2008-006014-20
+11/18/2021 15:31:26,2008,226,EEA and Non-EEA,226 randomized in EUCTR doc results. Agreement on others.,2007-001097-90
+11/18/2021 15:33:09,2016,763,EEA and Non-EEA,Agreement,2015-004026-34
+11/18/2021 15:35:00,2011,26,EEA Only,Agreement,2011-000133-37
+11/18/2021 15:36:51,2006,30,EEA and Non-EEA,Agreement between regs,2006-002696-40
+11/19/2021 11:26:49,2009,34,EEA Only,Agreement,2008-005903-25
+11/19/2021 11:30:45,2007,396,EEA and Non-EEA,Agreement,2005-003401-87
+11/19/2021 11:33:55,2013,2,EEA Only,Very detailed EUCTR results,2012-004442-15
+11/19/2021 11:39:58,2010,16000,EEA Only,EUCTR reg only,2009-009921-28
+11/19/2021 11:47:26,2011,108,EEA Only,Agreement between reg. Used CTG for start date as more recent info than EUCTR.,2009-011039-11
+11/19/2021 11:49:05,2011,150,EEA Only,EUCTR reg only source,2010-019109-40
+11/19/2021 11:50:16,2010,210,EEA Only,EUCTR reg only source,2010-018686-36
+11/19/2021 11:52:34,2011,54,EEA and Non-EEA,54 entered Part 1 of study (per paper) so using that number. ,2010-021850-20
+11/19/2021 12:05:07,2008,276,EEA Only,Agreement,2008-001968-36
+11/19/2021 12:07:58,2006,288,EEA and Non-EEA,Agreement,2005-005597-67
+11/19/2021 12:10:34,2011,157,EEA Only,Agreement,2010-023023-19
+11/19/2021 12:14:12,2007,53,EEA Only,A bit confusing on enrollment and multi-stage. Taking largest number entered into any part which is 53. Not loads of detail in article so had to use EUCTR reg for other parts.,2006-004296-35
+11/19/2021 12:15:58,2002,131,Non-EEA,131 assigned to tx.,2014-004162-17
+11/19/2021 12:18:21,2012,500,EEA and Non-EEA,Agreement,2011-001965-42
+11/19/2021 12:23:11,2007,529,EEA Only,Used 2007 as start year from CTG as most recently checked/updated. Paper didn't include start year.,2006-002940-28
+11/19/2021 12:26:42,2010,398,EEA and Non-EEA,Agreement,2009-017479-29
+11/19/2021 12:31:02,2012,363,EEA and Non-EEA,Agreement (Enrollment on EUCTR (359) slightly off from paper. Used randomized number from paper).,2012-000347-28
+11/19/2021 12:33:46,2011,52,EEA Only,Agreement,2011-002865-39
+11/19/2021 12:35:34,2013,1669,EEA and Non-EEA,Agreement,2013-001141-14
+11/19/2021 12:37:48,2011,580,EEA and Non-EEA,Agreement,2010-022455-31
+11/19/2021 12:39:45,2015,22,EEA Only,Relied on more recently updated CTG entry.,2014-004194-16
+11/19/2021 12:41:47,2013,39,EEA and Non-EEA,39 is Randomized. Agreement.,2011-006294-26
+11/19/2021 12:44:45,2008,92,EEA Only,See note about trial during search. Info taken from document on EUCTR and reg.,2007-001377-28
+11/19/2021 12:47:34,2006,2296,EEA and Non-EEA,Used 2296 from CTG as seemed to be to broadest trial population definition.,2006-002529-21
+11/19/2021 12:51:01,2009,40,EEA Only,Pieced together from all sources,2008-000245-55
+11/19/2021 12:52:54,2011,120,EEA Only,Preferred estimated enrollment from EUCTR,2008-005925-12
+11/19/2021 12:55:00,2012,721,EEA and Non-EEA,Agreement,2011-006174-47
+11/19/2021 13:11:27,2008,132,Non-EEA,Agreement,2015-005190-21
+11/19/2021 13:13:23,2009,45,EEA Only,34 inclusive of control group in paper,2009-013469-25
+11/19/2021 13:16:27,2013,135,EEA Only,Agreement,2012-003487-48
+11/19/2021 13:32:39,2012,24,EEA and Non-EEA,EUCTR results x-reffed with CTG,2011-004584-67
+11/19/2021 13:34:01,2007,100,EEA Only,Agreement,2006-004397-27
+11/19/2021 13:37:08,2007,210,EEA Only,Agreement,2006-001707-11
+11/19/2021 13:39:05,2012,61,EEA Only,Agreement,2010-024046-29
+11/19/2021 13:45:19,2005,118,EEA and Non-EEA,Agreement,2004-000367-98
+11/19/2021 14:07:45,2012,189,EEA Only,50 actually switched to treatment but additional 139 were included as controls.,2012-001142-18
+11/19/2021 14:08:58,2011,48,EEA Only,EUCTR reg only,2011-000291-34
+11/19/2021 14:11:28,2010,194,EEA and Non-EEA,Agreement. 194 is randomized.,2011-000536-28
+11/19/2021 14:12:23,2007,40,EEA Only,EUCTR reg only,2006-003473-27
+11/19/2021 14:13:22,2013,10,EEA Only,Pieced together from registrations,2010-024665-52
+11/19/2021 14:15:58,2013,68,EEA and Non-EEA,Agreement,2012-001711-23
+11/19/2021 14:17:20,2004,151,EEA and Non-EEA,151 randomized per EUCTR results doc,2004-002078-45
+11/19/2021 14:18:50,2014,81,EEA Only,Agreement (but mainly from CTG),2013-004544-32
+11/19/2021 14:47:05,2012,243,EEA Only,Agreement. 243 is randomized.,2012-000057-31
+11/19/2021 15:55:06,2008,130,EEA Only,EUCTR reg only,2007-002168-84
+11/19/2021 15:57:44,2014,36,EEA Only,Agreement,2012-005842-39
+11/19/2021 16:00:02,2012,309,EEA Only,Agreement,2011-005017-37
+11/19/2021 16:02:12,2008,439,EEA and Non-EEA,Agreement,2007-001913-41
+11/19/2021 16:03:16,2008,29,EEA Only,EUCTR reg only,2008-004432-20
+11/19/2021 16:05:11,2011,60,EEA Only,Paper had final enrollment. ,2010-022699-30
+11/19/2021 16:06:54,2014,63,EEA Only,agreement (63 randomized),2013-000823-15
+11/19/2021 16:08:17,2008,129,EEA and Non-EEA,Agreement,2008-003016-35
+11/19/2021 16:09:26,2006,21,EEA Only,EUCTR reg compared to located poster,2005-005914-18
+11/19/2021 16:16:09,2011,12,EEA Only,Sources seem to agree 12 actually received treatment.,2010-022058-18
+11/19/2021 16:22:10,2011,3,EEA Only,Agreement,2010-018776-24
+11/19/2021 16:48:03,2005,43,EEA Only,Agreement,2005-001012-41
+11/19/2021 17:18:39,2010,206,EEA and Non-EEA,Agreement,2009-017438-32
+11/19/2021 17:23:38,2007,120,EEA Only,EUCTR results doc,2007-001465-14
+11/19/2021 17:31:12,2015,36,EEA and Non-EEA,Preferencing EUCTR results but cross-reffed with CT.gov,2013-005628-41
+11/19/2021 17:57:14,2009,48,EEA and Non-EEA,EUCTR. Enrollment from CTG/conference poster,2009-010730-21
+11/19/2021 18:00:48,2011,315,EEA and Non-EEA,Agreement,2010-023002-13
+11/19/2021 18:08:39,2006,24,EEA Only,Mainly from CTG and article,2005-003293-25
+11/19/2021 18:15:28,2007,42,EEA Only,EUCTR results,2006-005953-31
+11/19/2021 18:47:08,2009,10,EEA Only,Agreement,2009-014765-74
+11/19/2021 21:27:21,2008,14,EEA Only,Agreement,2008-004126-16
+11/19/2021 21:28:34,2010,7,EEA Only,CTG entry,2009-016090-14
+11/19/2021 21:31:27,2007,52,EEA Only,Agreement,2007-002920-14
+11/19/2021 21:33:01,2007,111,EEA Only,EUCTR results,2007-000532-47
+11/19/2021 21:35:12,2004,469,EEA and Non-EEA,Agreement,2004-000363-10
+11/19/2021 21:36:57,2008,47,EEA Only,Agreement,2007-003080-45
+11/19/2021 21:38:43,2010,282,EEA Only,Agreement,2009-013856-61
+11/19/2021 21:40:07,2010,38,EEA Only,Agreement. Start date from EUCTR approvals.,2013-003323-11
+11/19/2021 21:42:27,2014,48,EEA and Non-EEA,Agreement,2013-003183-31
+11/19/2021 21:43:57,2006,17,EEA Only,EUCTR results,2006-001559-37
+11/19/2021 21:44:49,2007,90,EEA Only,EUCTR reg only,2007-001678-10
+11/19/2021 21:47:22,2015,12,EEA Only,Agreement,2015-002724-16
+11/19/2021 22:06:54,2011,566,EEA and Non-EEA,Agreement,2010-019968-37
+11/22/2021 12:47:32,2005,267,EEA and Non-EEA,Agreement,2007-004350-82
+12/21/2021 22:29:36,2011,41,EEA Only,Mainly from EUCTR. Slight discrepancies between sources but 41 people were enrolled and 35 completed.,2010-022772-31
+12/21/2021 22:44:41,2006,90,EEA Only,Did best I could with EUCTR entry,2005-004736-51
+12/21/2021 22:47:50,2011,233,EEA Only,Paper said 233 randomised and only in Spain. 2011 from later updated ClinicalTrials.gov entry.,2010-018379-70
+12/21/2021 22:51:02,2009,39,EEA Only,Mainly from paper.,2007-005232-81
+12/21/2021 22:52:49,2005,8,EEA Only,Enrollment from paper. Other from EUCTR reg.,2005-002208-40
+12/21/2021 22:56:05,2004,150,EEA and Non-EEA,Pieced together from registrations.,2004-004296-11
+12/21/2021 22:57:24,2005,20,EEA Only,Based on EUCTR reg,2005-000710-12
+12/21/2021 23:01:00,2011,45,EEA Only,"Enrollment from paper, others from EUCTR entry",2010-019195-67
+12/22/2021 2:11:56,2012,30,EEA Only,From EUCTR reg,2011-005666-37
+12/22/2021 2:21:29,2012,47,EEA Only,Final report in paper seems to have had 47 people in it despite CT.gov saying 37. Other info from Clinicaltrials.gov,2011-002472-16
+12/22/2021 2:27:37,2006,42,EEA and Non-EEA,The study technically was planned internationally but they only had Italian data in the end.,2006-000713-37
+12/22/2021 2:30:01,2017,113,EEA Only,Agreement,2016-002531-15
+12/22/2021 2:32:19,2007,66,EEA Only,Mainly from paper. Location from EUCTR reg.,2006-002152-16
+12/22/2021 2:35:04,2008,22,EEA Only,Paper and EUCTR entry,2007-007094-23
+12/22/2021 2:38:17,2010,38,EEA Only,38 includes healthy controls.,2010-022693-14
+12/22/2021 2:45:07,1999,85,EEA Only,Mainly from paper.,2006-002737-21
+12/22/2021 2:51:48,2009,39,EEA Only,Paper has 39 people across the two studies that form something like an ITT population.,2009-011582-88
+12/22/2021 2:54:06,2009,10,EEA Only,Combination of paper and EUCTR reg,2006-006749-15
+12/22/2021 2:57:56,2006,25,EEA Only,Combo of paper and EUCTR,2005-001004-39
+12/22/2021 3:01:21,2009,40,EEA Only,Papers compared to EUCTR entry. Both papers combined had 40 participants.,2005-005453-21
