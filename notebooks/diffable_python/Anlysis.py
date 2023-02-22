@@ -31,12 +31,12 @@ sys.path.append(parent)
 # + trusted=true
 #importing custom functions for analysis
 
-from lib.functions import ci_calc, z_test, summarizer, check_dupes
+from lib.functions import ci_calc, z_test, summarizer, check_dupes, simple_logistic_regression, crosstab
 
 #ci_calc will compute a simple confidence interval around a proportion
-#summarizer gives a nice output of proprotions and CIs
-#get_combos helps to get intersections
+#summarizer gives a nice output of proportions and CIs and returns and item with them
 #check_dupes helps with the date analysis
+#simple_logicstic_regression and crosstab do what they say on the tin
 # -
 
 # # Data Loading and Setup
@@ -630,6 +630,8 @@ graphing_df.to_csv(parent + '/data/graphing_data/start_year_data.csv')
 # -
 
 # # Reporting of Trial IDs
+#
+# Might need to re-adjust this so that only things eligible to have that ID (i.e. registered there) are in the denom
 
 # + trusted=true
 trial_id_df = analysis_df[['euctr_id', 'nct_id', 'isrctn_id', 'journal_results_inc', 'journal_reg_numbers']].reset_index(drop=True)
@@ -641,17 +643,177 @@ reg_id_df = trial_id_df[trial_id_df.journal_results_inc == 1].journal_reg_number
 reg_id_df
 
 # + trusted=true
-reg_id_df[reg_id_df['index'].str.contains('ClinicalTrials.gov')].journal_reg_numbers.sum()
+print(f'{reg_id_df.journal_reg_numbers.sum() - reg_id_df[reg_id_df["index"] == "None"].journal_reg_numbers.values[0]} journal articles contain any ID')
 
 # + trusted=true
-reg_id_df[reg_id_df['index'].str.contains('EUCTR/EudraCT')].journal_reg_numbers.sum()
+print('Contains ClinicalTrials.gov ID:')
+summarizer(reg_id_df[reg_id_df["index"].str.contains("ClinicalTrials.gov")].journal_reg_numbers.sum(), reg_id_df.journal_reg_numbers.sum())
 
 # + trusted=true
-reg_id_df[reg_id_df['index'].str.contains('ISRCTN')].journal_reg_numbers.sum()
+print('Contains EUCTR/EudraCT ID:')
+summarizer(reg_id_df[reg_id_df["index"].str.contains("EUCTR/EudraCT")].journal_reg_numbers.sum(), reg_id_df.journal_reg_numbers.sum())
 
 # + trusted=true
-186+66+15
+print('Contains ISRCTN:')
+summarizer(reg_id_df[reg_id_df["index"].str.contains("ISRCTN")].journal_reg_numbers.sum(), reg_id_df.journal_reg_numbers.sum())
+
+# + trusted=true
+print('No ID:')
+summarizer(reg_id_df[reg_id_df["index"].str.contains("None")].journal_reg_numbers.sum(), reg_id_df.journal_reg_numbers.sum())
 # -
+# # Exploratory Analayses
+
+# + trusted=true
+#Creating the exploratory analysis dataset through merging a few different DFs 
+#and aligning the columns for ease of use.
+
+exploratory_final = analysis_df[['euctr_id', 'euctr_results_inc', 'ctgov_results_inc', 'isrctn_results_inc', 
+                                 'journal_results_inc', 'any_results_inc', 'nct_id', 'isrctn_id', 
+                                 'journal_result']].merge(full_sample[['eudract_number', 
+                                                                  'inferred']], 
+                                                          how='left', 
+                                                          left_on='euctr_id', 
+                                                          right_on='eudract_number')
+
+exploratory_final = exploratory_final.merge(regression, 
+                                            how='left', 
+                                            left_on='euctr_id', 
+                                            right_on='Trial ID').drop(['eudract_number', 
+                                                                       'Timestamp', 
+                                                                       'Notes', 
+                                                                       'Trial ID'], axis=1)
+
+exploratory_final = exploratory_final.merge(other_reg_data, 
+                                            how='left', 
+                                            left_on='euctr_id', 
+                                            right_on='trial_id').drop(['Unnamed: 0', 'trial_id'], axis=1)
+
+exploratory_final.columns = ['euctr_id', 'euctr_results_inc', 'ctgov_results_inc', 'isrctn_results_inc', 
+                             'journal_results_inc', 'any_results_inc', 'nct_id', 'isrctn_id', 'journal_result', 
+                             'inferred', 'trial_start_yr', 'enrollment', 'location', 'sponsor_status', 
+                             'protocol_country', 'sponsor_country']
+
+# + trusted=true
+exploratory_final.head()
+
+# + trusted=true
+#Using these variable to create Sample Charactersitics table in paper. 
+#Run either .describe() or .value_counts() depending on variable
+exploratory_final.protocol_country.describe()
+
+# + trusted=true
+exploratory_final.trial_start_yr.value_counts().sort_index()
+# -
+
+# ## Analysis 1: Regression
+
+# + trusted=true
+#Taking only what we need:
+regression_final = exploratory_final[['euctr_id', 'euctr_results_inc', 'any_results_inc', 'inferred', 
+                                      'trial_start_yr', 'enrollment', 'location', 'sponsor_status', 
+                                      'protocol_country']].reset_index(drop=True)
+
+regression_final = regression_final[regression_final.any_results_inc == 1].reset_index(drop=True)
+
+regression_final = regression_final.join(pd.get_dummies(regression_final[['location', 'sponsor_status']]), how='left')
+
+# + trusted=true
+regression_final.location.value_counts()
+
+# + trusted=true
+y_reg = regression_final['euctr_results_inc'].reset_index(drop=True)
+x_reg = regression_final[['inferred', 'trial_start_yr', 'enrollment',
+                         'protocol_country', 'location_EEA and Non-EEA', 'location_Non-EEA', 
+                         'sponsor_status_Commercial']].reset_index(drop=True)
+
+# + trusted=true
+simple_logistic_regression(y_reg, x_reg)
+# -
+
+# If we run the regression per protocol it will not converge because, as shown earlier, no trials with inferred completion dates have a result on the EUCTR making that a perfect predictor. I will therefore remove this from the regression as it is a derived variable anyway.
+
+# + trusted=true
+#Re-running the regression without the "inferred" variable
+y_reg1 = regression_final['euctr_results_inc'].reset_index(drop=True)
+x_reg1 = regression_final[['trial_start_yr', 'enrollment',
+                         'protocol_country', 'location_EEA and Non-EEA', 'location_Non-EEA', 
+                         'sponsor_status_Commercial']].reset_index(drop=True)
+
+# + trusted=true
+simple_logistic_regression(y_reg1, x_reg1)
+
+# + trusted=true
+#Check univariable ORs here with any of these variables:
+#['trial_start_yr', 'enrollment', 'protocol_country', 'location_EEA and Non-EEA', 'location_Non-EEA', 
+#'sponsor_status_Commercial']
+
+x_regu = regression_final[['trial_start_yr']].reset_index(drop=True)
+
+simple_logistic_regression(y_reg1, x_regu)
+# -
+
+# When running, keep track of the univariate outputs here.
+
+# + trusted=true
+#Holm-Bonferroni corrected thresholds
+print(.05 / (7 - 1 + 1))
+print(.05 / (7 - 2 + 1))
+print(.05 / (7 - 3 + 1))
+print(.05 / (7 - 4 + 1))
+print(.05 / (7 - 5 + 1))
+# -
+
+# # Analysis 2: Sponsor Country
+# Each trial will be assigned a “sponsor country” based on the most frequent sponsor country assigned in the EUCTR country protocols. A protocol of a specific country need not contain a sponsor from that country. If no single country appears most frequently, the trial will be coded as having “multi-country” sponsorship. The percent of trials reported to the EUCTR, other registries, and the literature will be reported for each unique sponsor country in the sample.
+
+# + trusted=true
+spon_country = exploratory_final[['euctr_id', 'nct_id', 'isrctn_id', 'journal_result', 'euctr_results_inc', 
+                                  'ctgov_results_inc', 'isrctn_results_inc', 'journal_results_inc', 
+                                  'any_results_inc', 'sponsor_country']].reset_index(drop=True)
+
+# + trusted=true
+#First for the EUCTR
+spon_country_reporting = crosstab(spon_country, 'euctr_results_inc', 'sponsor_country').reset_index()
+spon_country_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
+spon_country_reporting['prct_reported'] = spon_country_reporting.reported / spon_country_reporting['all']
+spon_country_reporting.sort_values(by='all', ascending=False)
+
+# + trusted=true
+#Now for the other dissemination routes
+
+#CTG
+ct_gov_trials = spon_country[spon_country.nct_id.notnull()].reset_index(drop=True)
+ctg_reporting = crosstab(ct_gov_trials, 'ctgov_results_inc', 'sponsor_country').reset_index()
+ctg_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
+ctg_reporting['prct_reported'] = ctg_reporting.reported / ctg_reporting['all']
+ctg_reporting.sort_values(by='all', ascending=False)
+
+# + trusted=true
+#ISRCTN
+isrctn_trials = spon_country[spon_country.isrctn_id.notnull()].reset_index(drop=True)
+isrctn_reporting = crosstab(isrctn_trials, 'isrctn_results_inc', 'sponsor_country').reset_index()
+isrctn_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
+isrctn_reporting['prct_reported'] = (isrctn_reporting.reported / isrctn_reporting['all']) * 100
+isrctn_reporting.sort_values(by='all', ascending=False)
+
+# + trusted=true
+#Journal Reporting
+journal_reporting = crosstab(spon_country, 'journal_results_inc', 'sponsor_country').reset_index()
+journal_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
+journal_reporting['prct_reported'] = journal_reporting.reported / journal_reporting['all']
+journal_reporting.sort_values(by='all', ascending=False)
+
+# + trusted=true
+#Any Reporting
+any_reporting = crosstab(spon_country, 'any_results_inc', 'sponsor_country').reset_index()
+any_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
+any_reporting['prct_reported'] = any_reporting.reported / any_reporting['all']
+any_reporting.sort_values(by='all', ascending=False)
+# -
+
+
+
+
 
 
 

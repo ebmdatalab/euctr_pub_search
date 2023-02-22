@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from math import sqrt
 from statsmodels.stats.proportion import proportions_ztest
+import statsmodels.api as sm
 
 def status_exclude(x):
     d = {}
@@ -43,11 +44,48 @@ def z_test(count, nobs):
     return stat, pval
 
 def summarizer(num, denom):
+    print(f'Outcome of Interest: {num}')
     print(f'Total: {denom}')
-    print(f'Results found: {num}')
     ci_out = ci_calc(num, denom)
     return ci_out
 
 def check_dupes(x):
     x1 = [value for value in list(x) if value is not pd.NaT]
     return len(tuple(x1)) != len(set(tuple(x1)))
+
+def simple_logistic_regression(outcome_series, exposures_df, cis=.05):
+    """
+    Simple function for tidy logistic regression output.]
+    Keyword arguments:
+    outcome_series -- The outcome variable as a series
+    exposure_df -- A DataFrame containing all your exposures
+    cis -- Define what size you want your CIs to be. Default is .05 which provides 95% CIs
+    """
+
+    exposures_df['cons'] = 1.0
+    mod = sm.Logit(outcome_series, exposures_df)
+    res = mod.fit()
+    print(res.summary())
+    params = res.params
+    conf = res.conf_int(cis)
+    p = res.pvalues
+    conf['OR'] = params
+    ci_name = round((cis/2)*100,2)
+    lower = str(ci_name) + '%'
+    upper = str(100 - ci_name) + '%'
+    conf.columns = [lower, upper, 'OR']
+    conf = np.exp(conf)
+    conf['p_value'] = p
+    conf = conf[['OR', lower, upper, 'p_value']]
+    conf = conf.round({'OR':2, 'p_value':5, lower:2, upper:2})
+    return conf
+
+def crosstab(df, outcome, exposure):
+    """
+    For quick crosstabs in pandas
+    Keyword arguments:
+    df -- The dataframe that contains the data
+    outcome -- A string of the column name that contains the outcome variable
+    exposure -- A string of the column name that contains the exposure variable
+    """
+    return pd.crosstab(df[exposure], df[outcome], margins=True)
