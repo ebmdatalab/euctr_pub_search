@@ -447,6 +447,8 @@ six==1.16.0
     #   patsy
     #   plotly
     #   python-dateutil
+sklearn==0.0.post1
+    # via -r requirements.in
 sniffio==1.2.0
     # via anyio
 soupsieve==2.3.1
