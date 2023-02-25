@@ -20,6 +20,7 @@ import numpy as np
 from datetime import date
 from dateutil.relativedelta import relativedelta
 from ast import literal_eval
+import gc
 
 # + trusted=true
 import sys
@@ -34,11 +35,12 @@ sys.path.append(parent)
 
 from lib.functions import status_exclude, group_dates, date_fix
 
-# + trusted=true
-#These are our scrapes of the full EUCTR protocol data and the EUCTR results data. 
-#This data was scraped between 1 December and 3 December 2020
+flowchart_dict = {}
+# -
 
-#Limiting to only the columns we need to save on memory
+# The full scrape of the EUCTR from December 2020 is too big to easily committ to GitHub (>200mb). A copy of the full file lives on the OSF repo (https://osf.io/tu5pz). For our purposes in this analysis, I've created a smaller version of that file with only the columns we need. The below cell will check to see if that smaller file exists and will try to create it if not. However, by default it will throw an error if it tries to create it since the bigger original file isn't in this repo. If you want to work with, or check, the raw file directly (called `euctr_euctr_dump-2020-12-03-095517.csv.zip`), you can download the zipped csv from the OSF link above and put it in the `source_data` folder. I've also split it up into 4 small files that I can committ in the `source_data` folder which you can play around with individually or combine to re-make the original dataset if you'd like. Using something like `pd.concat` to do this is computationally expensive and annoying so I avoid that here.
+
+# + trusted=true
 usecols = ['eudract_number', 
            'eudract_number_with_country', 
            'end_of_trial_status', 
@@ -53,15 +55,23 @@ usecols = ['eudract_number',
            'trial_in_the_member_state_concerned_days', 
            'date_of_the_global_end_of_the_trial']
 
-dec_results = pd.read_csv(parent + '/data/source_data/' + 'euctr_data_quality_results_scrape_dec_2020.csv.zip')
+try:
+    dec_full = pd.read_csv(parent + '/data/source_data/' + 'euctr_processed_dec2020.csv.zip', low_memory=False, usecols=usecols)
+    
+except FileNotFoundError:
+    dec_full = pd.read_csv(parent + '/data/source_data/' + 'euctr_euctr_dump-2020-12-03-095517.csv.zip', low_memory=False, usecols=usecols)
+    
+    dec_full.to_csv(parent + '/data/source_data/' + 'euctr_processed_dec2020.csv.zip', index=False, compression='zip')
 
-dec_full = pd.read_csv(parent + '/data/source_data/' + 'euctr_euctr_dump-2020-12-03-095517.csv.zip', low_memory=False, usecols=usecols)
+# + trusted=true
+#This loads in the results section scrape
+dec_results = pd.read_csv(parent + '/data/source_data/' + 'euctr_data_quality_results_scrape_dec_2020.csv.zip')
 # -
 
 # First, we can quickly exclude all trials that appear to have never started in Europe because they were either "Not Authorised" or "Prohibited by CA" across all trial protocols.
 
 # + trusted=true
-#Taking the columns we need
+#Taking the columns we need at the moment
 #Applying custom imported function during groupby to combine multiple country protocols into 1 record and exclude trials
 #In a status we don't want
 
@@ -77,18 +87,16 @@ trial_status['never_started'] = np.where(trial_status.other_status == trial_stat
 never_started_exclusions = trial_status[trial_status.never_started == 1].index.to_list()
 
 # + trusted=true
-print(f'There are {len(never_started_exclusions)} trials that were never approved in the EU/EEA')
-
-# + trusted=true
 #Lets exclude those trial moving forward:
 
 dec_started = dec_full[~dec_full.eudract_number.isin(never_started_exclusions)].reset_index(drop=True)
 
 # + trusted=true
-#checks
-print(len(dec_full))
-print(len(dec_started))
-print(dec_full.eudract_number.nunique())
+#For the flow chart lets record the amount of unique EUCTR numbers and those excluded for not starting.
+print(f'There are {dec_full.eudract_number.nunique()} unique trials on the EUCTR. {len(never_started_exclusions)} of these were excluded for never being authorised.')
+
+flowchart_dict['full_euctr'] = dec_full.eudract_number.nunique()
+flowchart_dict['not_authorised'] = len(never_started_exclusions)
 # -
 
 # # Extracted End Dates
@@ -116,18 +124,18 @@ merged_dates.head()
 
 # Here we use 2 functions, imported above, to help manage the data.
 #
-# 1. **group_dates** lets us collapse each trial into a single trial ID. Each row in this initial dataset reprents a country-level protocol, not an entire trial so some IDs are repeated. Even though the protocol completion date should hypothetically be the same across all the protocols, this is not guaranteed. During the groupby we take the latest completion date provided (or the "max"). To keep the dates together, we also take the max of the results_completion but this date will be the same across all entries with results. 
+# 1. **group_dates** lets us collapse each trial into a single trial ID. Each row in this initial dataset reprents a country-level protocol, not an entire trial so some IDs are repeated. Even though the protocol completion date should hypothetically be the same across all the protocols, this is not guaranteed. During the groupby we take the latest completion date provided (or the "max"). To keep the dates together, we also take the max of the `results_completion` but this date will be the same across all entries with results. 
 #
 #
 # 2. **date_fix** gets rid of obvious outlier dates with completion dates either before 2004 (i.e. before the EUCTR was created) or after 2020 (i.e. in the future and therefore should not exist yet since these dates are entered retrospectively). While some of these may not be mistakes, they obviously represent some sort of odd situation we would rather avoid. These are turned into null values where appropriate.
 
 # + trusted=true
-#Running the groupby
+#Running the groupby with group_dates
 
 latest_dates = merged_dates.groupby('eudract_number', as_index=False).apply(group_dates).reset_index(drop=True)
 
 # + trusted=true
-#Lets see how many dates we are exluding with the date_fix
+#Checking how many dates we would be exluding withe the date_fix function we see it is a nominal amount
 
 print(f'{len(latest_dates[(latest_dates["latest_completion_p"] < pd.to_datetime("2004-01-01")) | (latest_dates["latest_completion_p"] > pd.to_datetime("2020-12-31"))])}\
  replaced from the protocol dates')
@@ -143,7 +151,7 @@ print(f'{len(latest_dates[(latest_dates["latest_completion_r"] < pd.to_datetime(
 #latest_dates[(latest_dates["latest_completion_r"] < pd.to_datetime("2004-01-01")) | (latest_dates["latest_completion_r"] > pd.to_datetime("2020-12-31"))]
 
 # + trusted=true
-#Running the date fix
+#Actually running the date fix
 
 latest_dates['latest_completion_p'] = latest_dates['latest_completion_p'].apply(date_fix)
 latest_dates['latest_completion_r'] = latest_dates['latest_completion_r'].apply(date_fix)
@@ -161,12 +169,16 @@ latest_dates.head()
 #This forms the population of trials in which we could extract a clear end date.
 
 final_dates = latest_dates[latest_dates.available_completion.notnull()].reset_index(drop=True)
-# -
-
-# # Secondary Populations - Inferred End Date
 
 # + trusted=true
-#here is everything we couldn't infer an end date for.
+print(f'We could extract end dates for {len(final_dates)} trials.')
+flowchart_dict['extracted_dates'] = len(final_dates)
+# -
+
+# # Creating Inferred End Dates
+
+# + trusted=true
+#Here is everything we couldn't extract an end date for that we will try and infer a date for.
 
 no_completion = latest_dates[latest_dates.available_completion.isna()].reset_index(drop=True)
 
@@ -196,16 +208,16 @@ no_comp_inf['date_of_competent_authority_decision'] = pd.to_datetime(no_comp_inf
 no_comp_inf['date_of_ethics_committee_opinion'] = pd.to_datetime(no_comp_inf['date_of_ethics_committee_opinion'])
 
 #Creating a new column for the latest approval date within a protocol, and then doing a groupby, so we get the
-#Latest approval date for the whole trial which we will use later.
+#Latest approval date for the whole trial which we will use later as a proxy for the start date.
 
 no_comp_inf['latest_approval'] = no_comp_inf[['date_of_competent_authority_decision', 'date_of_ethics_committee_opinion']].max(axis=1)
 
 latest_approval = no_comp_inf[['eudract_number', 'latest_approval']].groupby('eudract_number', as_index=False).max()
 
 # + trusted=true
-#Here we turn the day/month/year data we have on expected duration in days (assuming a month is 30 days)
+#Here we turn the day/month/year data we have on expected duration into just days (assuming a month is 30 days).
 #We do this across both the duration expected within country and globally and then take the longest of the two
-#For each protocol and then once again we group to get the longest possible duration provided
+#for each protocol and then once again we group to get the longest possible duration provided
 
 no_comp_inf['country_days'] = ((no_comp_inf['trial_in_the_member_state_concerned_years'].fillna(0) * 364) + 
                                (no_comp_inf['trial_in_the_member_state_concerned_months'].fillna(0) * 30) + 
@@ -220,17 +232,20 @@ no_comp_inf['max_days'] = no_comp_inf[['country_days', 'global_days']].max(axis=
 longest_duration = no_comp_inf[['eudract_number', 'max_days']].groupby('eudract_number', as_index=False).max()
 
 # + trusted=true
-#Now we can merge in the latest approval date and pick out the trial we can infer an end date for
-#So we exclude trials that had 0 duration (meaning no information in these fields) and no approval dates
-
+#Now we can merge in the latest approval date and pick out the trials we can infer an end date for
 inferred_df = latest_approval.merge(longest_duration, how='left', on='eudract_number')
 
+#So we exclude trials that had 0 duration (meaning no information in these fields) and no approval dates
 can_infer = inferred_df[(inferred_df.max_days != 0) & (inferred_df.latest_approval.notnull())].reset_index(drop=True)
+flowchart_dict['inferred'] = len(can_infer)
 
 # + trusted=true
-#Saving the trials we exluded here to be able to check later
+#Saving the trials we exluded here for inspection as needed
 
 no_inference = inferred_df[(inferred_df.max_days == 0) | (inferred_df.latest_approval.isnull())].eudract_number.to_list()
+print(f'We could not extract or infer a date for {len(no_inference)} trials.')
+
+flowchart_dict['missing_completion_info'] = len(no_inference)
 
 # + trusted=true
 #Now we add the latest approval to the longest trial duration
@@ -267,7 +282,7 @@ df2 = df1.merge(can_infer[['eudract_number', 'inferred_completion_adj']], how='l
 df2.head()
 
 # + trusted=true
-#Conditions to create the inclusion/exclusion categorical variable
+#Conditions to create the inclusion/exclusion categorical variables
 
 #Trials that were "not authorised" or "prohibited" in all countries
 never_start = df2.eudract_number.isin(never_started_exclusions)
@@ -294,9 +309,13 @@ df2['exclusion_status'] = np.select(conds, labels)
 df2.head()
 
 # + trusted=true
-#We can take a look at how frequently each category appears
+#We can take a look at how frequently each category appears which shold match the numbers we grabbed earlier
+#And are storing in that dictionary as we go along.
 
 df2.exclusion_status.value_counts()
+
+# + trusted=true
+flowchart_dict
 
 # + trusted=true
 #Taking the appropriate final date
@@ -311,6 +330,13 @@ df2['date_inclusion'] = np.where(df2.final_date < pd.to_datetime('2018-12-01'), 
 #Making a binary variable for inferred end dates
 
 df2['inferred'] = np.where(df2.exclusion_status == 'Inferred', 1, 0)
+
+# + trusted=true
+flowchart_dict['inferred_date_exclude'] = len(df2[(df2.date_inclusion == 0) & (df2.exclusion_status == 'Inferred')])
+flowchart_dict['extracted_date_exclude'] = len(df2[(df2.date_inclusion == 0) & (df2.exclusion_status == 'Extracted')])
+
+# + trusted=true
+flowchart_dict
 
 # + trusted=true
 #Creating the final dataset with only included trials, the end date, and the inferred status
@@ -332,7 +358,7 @@ print(len(only_included))
 print(only_included.eudract_number.nunique())
 
 # + trusted=true
-#When we the sample was taken the following code was run to generate a random seed.
+#When the sample was taken the following code was run to generate a random seed.
 
 #from random import randint
 
@@ -347,6 +373,8 @@ sample = final_df.sample(500, random_state=7872)
 sample.head()
 
 # + trusted=true
+#Uncomment this to save the file
+
 #sample.to_csv(parent + '/data/samples/' + 'euctr_search_sample_final.csv')
 # -
 
@@ -354,7 +382,7 @@ sample.head()
 #
 # Per protocol, trials that are found to be withdrawn, meaning they never happened, at any time during the project, are to be replaced in the sample and re-searched. I will also replace trials that are clearly still ongoing based on other available information or are no longer available on the public EUCTR to be checked for some reason.
 #
-# To do this, we will take the sample population, exclude the trials from our original sample of 500, and then take a new sample of the remaining. At the final analysis, following all searches, there were 20 trials that need to be replaced and re-searched.
+# To do this, we will take the sample population, exclude the trials from our original sample of 500, and then take a new sample of the remaining. At the final analysis, following all searches, there were 20 trials that need to be replaced and re-searched (19 from the original sample and then one of the replacements had to be replaced).
 
 # + trusted=true
 #Getting a new random seed for the new replacement sample
@@ -372,6 +400,8 @@ replacement_pop = final_df[~(final_df.eudract_number.isin(sample.eudract_number.
 replacement_sample = replacement_pop.sample(20, random_state=6377)
 
 # + trusted=true
+#Uncomment this to save the file
+
 #replacement_sample.to_csv(parent + '/data/samples/' + 'replacement_sample.csv')
 
 # + trusted=true
@@ -510,6 +540,5 @@ final_df.head()
 
 
 
-# +
 
 
