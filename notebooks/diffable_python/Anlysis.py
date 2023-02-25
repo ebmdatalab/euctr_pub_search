@@ -44,7 +44,7 @@ from lib.functions import ci_calc, z_test, summarizer, check_dupes, simple_logis
 # + trusted=true
 #Loading in all the data and creating the analysis dataset.
 
-#Primary dataset with dates set
+#Primary dataset with dates turned into dates
 df = pd.read_csv(parent + '/data/final_dataset/final_dataset.csv')
 df['euctr_results_date'] = pd.to_datetime(df['euctr_results_date'])
 df['ctgov_results_date'] = pd.to_datetime(df['ctgov_results_date'])
@@ -60,6 +60,7 @@ other_reg_data = pd.read_csv(parent + '/data/additional_data/spon_country_data.c
 #the original sample (and replacements) for data on inferred dates
 sample = pd.read_csv(parent + '/data/samples/euctr_search_sample_final.csv')
 replacements  = pd.read_csv(parent + '/data/samples/replacement_sample.csv')
+full_sample = pd.concat([sample,replacements])
 
 #the results section scrape and making one column we need into dates
 dec_results = pd.read_csv(parent + '/data/source_data/' + 'euctr_data_quality_results_scrape_dec_2020.csv.zip')
@@ -73,12 +74,26 @@ last_search_any = pd.to_datetime('2023-01-03')
 
 # # Analysis Prep
 
-# ## Detail the exclusions
+# ## Detail the exclusions and get the inferred status of the final sample
 
 # + trusted=true
 #Number and reason for exclusions
 exclusions = df[df.replaced == 1]
 exclusions.replaced_reason.value_counts()
+
+# + trusted=true
+sample_inferred_status = df[df.replaced.isna()][['euctr_id']].merge(full_sample[['eudract_number', 'inferred']], how='left', left_on='euctr_id', right_on='eudract_number')
+
+# + trusted=true
+#Inferred completion date status of the final sample
+sample_inferred_status.inferred.value_counts()
+
+# + trusted=true
+exclusions_inferred_status = exclusions[['euctr_id']].merge(full_sample[['eudract_number', 'inferred']], how='left', left_on='euctr_id', right_on='eudract_number')
+
+# + trusted=true
+#Inferred completion date status of the trials we had to replace
+exclusions_inferred_status.inferred.value_counts()
 # -
 
 # ## Setting up the analysis dataset
@@ -117,8 +132,29 @@ analysis_df['any_results_inc'] = np.where(((analysis_df.euctr_results_inc == 1) 
                                           (analysis_df.isrctn_results_inc == 1) | 
                                           (analysis_df.journal_results_inc == 1)), 1, 0)
 
+# + trusted=true
+#Exporting the analysis dataset so it can be used elsewhere.
+
+analysis_df.to_csv(parent + '/data/final_dataset/' + 'analysis_df.csv')
+
 # + [markdown] tags=[]
 # # Main Analysis
+
+# + trusted=true
+analysis_df.head()
+
+# + trusted=true
+full_sample.head()
+
+# + trusted=true
+temp = analysis_df.merge(full_sample[['eudract_number', 'inferred']], how='left', left_on='euctr_id', right_on='eudract_number')
+
+# + trusted=true
+temp2.columns
+
+# + trusted=true
+temp2 = temp[temp.inferred == 1]
+temp2[(temp2.nct_id.notnull()) | (temp2.isrctn_id.notnull()) | (temp2.journal_results_inc == 1)]
 # -
 
 # ## Results on the EUCTR
@@ -156,7 +192,7 @@ results_types
 #Now we want to group like with like to get our final descriptive stats to report
 
 #Total with just tabular results
-ci_calc(results_types[results_types.results_type == 'Tabular'].euctr_results_format[0], total_found_euctr)
+summarizer(results_types[results_types.results_type == 'Tabular'].euctr_results_format[0], total_found_euctr)
 
 # + trusted=true
 #Total with just a Document
@@ -262,6 +298,12 @@ print(f'{just_euctr} trials had results on just the EUCTR')
 ci_calc(just_euctr, len(euctr_results))
 
 # + trusted=true
+#What did the distribution of documents look like for unique results
+
+just_euctr_ids = euctr_results_ids - ctg_results_ids - isrctn_results_ids - journal_results_ids
+euctr_results[euctr_results.euctr_id.isin(just_euctr_ids)].euctr_results_format.value_counts()
+
+# + trusted=true
 #How many had results on just on ClinicalTrials.gov?
 just_ctg = len(ctg_results_ids - euctr_results_ids - isrctn_results_ids - journal_results_ids)
 print(f'{just_ctg} trials had results on just ClinicalTrials.gov')
@@ -308,8 +350,6 @@ upset_plot_data.to_csv(parent + '/data/graphing_data/upset_data.csv')
 
 # + trusted=true
 #Making a new DF for this population to investiage results availability by inferred and available completion dates
-
-full_sample = pd.concat([sample,replacements])
 
 analysis_df_2 = analysis_df.merge(full_sample[['eudract_number', 'inferred']], 
                                   how='left', 
@@ -599,16 +639,17 @@ ci_calc(first_report_post[2], first_report_post.sum())
 
 # + trusted=true
 #What about trials not on ClinicalTrials.gov.
-first_pub_no_ctg = post_euctr[post_euctr.nct_id.isna()].earliest_results.value_counts()
+#We can ignore the trial with the earliest ISRCTN result here
+first_pub_no_ctg = post_euctr[(post_euctr.nct_id.isna())].earliest_results.value_counts()
 first_pub_no_ctg
 
 # + trusted=true
 #CI for journal
-ci_calc(first_pub_no_ctg[0],first_pub_no_ctg.sum())
+ci_calc(first_pub_no_ctg[0],first_pub_no_ctg.sum() - 1)
 
 # + trusted=true
 #CI for EUCTR
-ci_calc(first_pub_no_ctg[1],first_pub_no_ctg.sum())
+ci_calc(first_pub_no_ctg[1],first_pub_no_ctg.sum()- 1)
 
 # + trusted=true
 #CI for ISRCTN
@@ -617,7 +658,7 @@ ci_calc(first_pub_no_ctg[2],first_pub_no_ctg.sum())
 
 # ## Data for Start Year Figure
 #
-# Here we just get the data we would need and export it. Figures are makde in a separate notebook.
+# Here we just get the data we would need and export it. Figures are made in a separate notebook.
 
 # + trusted=true
 graphing_df = analysis_df[['euctr_id', 
@@ -640,27 +681,45 @@ trial_id_df = analysis_df[['euctr_id', 'nct_id', 'isrctn_id', 'journal_results_i
 reg_id_df = trial_id_df[trial_id_df.journal_results_inc == 1].journal_reg_numbers.value_counts(dropna=False).to_frame().reset_index()
 
 # + trusted=true
-reg_id_df
+#How many EUCTR/Publication pairs had an EUCTR ID
+
+euctr_pub_ids = trial_id_df[(trial_id_df.journal_results_inc == 1) & (trial_id_df.euctr_id.notnull())]
+print(f'There are {len(euctr_pub_ids)} trials with an EUCTR registration and a matched publication')
+print(f'Below are the ones with a Trial ID excluding the {euctr_pub_ids.journal_reg_numbers.value_counts()["None"]} with no ID')
+euctr_id_match = euctr_pub_ids[euctr_pub_ids.journal_reg_numbers != 'None'].journal_reg_numbers.value_counts()
+euctr_id_match
 
 # + trusted=true
-print(f'{reg_id_df.journal_reg_numbers.sum() - reg_id_df[reg_id_df["index"] == "None"].journal_reg_numbers.values[0]} journal articles contain any ID')
+#Stats on number containing an EUCTR ID
+summarizer(euctr_id_match.filter(like='EUCTR/EudraCT').sum(), len(euctr_pub_ids))
 
 # + trusted=true
-print('Contains ClinicalTrials.gov ID:')
-summarizer(reg_id_df[reg_id_df["index"].str.contains("ClinicalTrials.gov")].journal_reg_numbers.sum(), reg_id_df.journal_reg_numbers.sum())
+#How many CTG/Publication pairs had an NCT ID
+
+ctg_pub_ids = trial_id_df[(trial_id_df.journal_results_inc == 1) & (trial_id_df.nct_id.notnull())]
+print(f'There are {len(ctg_pub_ids)} trials with a ClinicalTrials.gov registration and a matched publication')
+print(f'Below are the ones with a Trial ID excluding the {ctg_pub_ids.journal_reg_numbers.value_counts()["None"]} with no ID')
+ctg_id_match = ctg_pub_ids[ctg_pub_ids.journal_reg_numbers != 'None'].journal_reg_numbers.value_counts()
+ctg_id_match
 
 # + trusted=true
-print('Contains EUCTR/EudraCT ID:')
-summarizer(reg_id_df[reg_id_df["index"].str.contains("EUCTR/EudraCT")].journal_reg_numbers.sum(), reg_id_df.journal_reg_numbers.sum())
+#Stats on number containing an NCT ID
+summarizer(ctg_id_match.filter(like='ClinicalTrials.gov').sum(), len(ctg_pub_ids))
 
 # + trusted=true
-print('Contains ISRCTN:')
-summarizer(reg_id_df[reg_id_df["index"].str.contains("ISRCTN")].journal_reg_numbers.sum(), reg_id_df.journal_reg_numbers.sum())
+#How many EUCTR/Publication pairs had an ISRCTN ID
+
+isrctn_pub_ids = trial_id_df[(trial_id_df.journal_results_inc == 1) & (trial_id_df.isrctn_id.notnull())]
+print(f'There are {len(isrctn_pub_ids)} trials with an ISRCTN registration and a matched publication')
+print(f'Below are the ones with a Trial ID excluding the {isrctn_pub_ids.journal_reg_numbers.value_counts()["None"]} with no ID')
+isrctn_id_match = isrctn_pub_ids[isrctn_pub_ids.journal_reg_numbers != 'None'].journal_reg_numbers.value_counts()
+isrctn_id_match
 
 # + trusted=true
-print('No ID:')
-summarizer(reg_id_df[reg_id_df["index"].str.contains("None")].journal_reg_numbers.sum(), reg_id_df.journal_reg_numbers.sum())
+#Stats on number containing an ISRCTN ID
+summarizer(isrctn_id_match.filter(like='ISRCTN').sum(), len(isrctn_pub_ids))
 # -
+
 # # Exploratory Analayses
 
 # + trusted=true
@@ -697,8 +756,16 @@ exploratory_final.columns = ['euctr_id', 'euctr_results_inc', 'ctgov_results_inc
 exploratory_final.head()
 
 # + trusted=true
-#Using these variable to create Sample Charactersitics table in paper. 
-#Run either .describe() or .value_counts() depending on variable
+exploratory_final[exploratory_final.enrollment.isna()]
+# -
+
+# Run the next two cells on the relevant variables in `exploratory_final` to get data for Table 1 of the paper.
+#
+# #We will run `.describe()` on `enrollment` and `protocol_country`
+#
+# #We will run `.value_counts()` on `sponsor_status`,`location`, and `trial_start_yr`
+
+# + trusted=true
 exploratory_final.protocol_country.describe()
 
 # + trusted=true
@@ -741,18 +808,16 @@ x_reg1 = regression_final[['trial_start_yr', 'enrollment',
 
 # + trusted=true
 simple_logistic_regression(y_reg1, x_reg1)
-
-# + trusted=true
-#Check univariable ORs here with any of these variables:
-#['trial_start_yr', 'enrollment', 'protocol_country', 'location_EEA and Non-EEA', 'location_Non-EEA', 
-#'sponsor_status_Commercial']
-
-x_regu = regression_final[['trial_start_yr']].reset_index(drop=True)
-
-simple_logistic_regression(y_reg1, x_regu)
 # -
 
-# When running, keep track of the univariate outputs here.
+# Check univariable ORs here with any of these variables:
+#
+# `trial_start_yr`, `enrollment`, `protocol_country`, `location_EEA and Non-EEA`, `location_Non-EEA`, `sponsor_status_Commercial`
+
+# + trusted=true
+x_regu = regression_final[['location_EEA and Non-EEA', 'location_Non-EEA']].reset_index(drop=True)
+
+simple_logistic_regression(y_reg1, x_regu)
 
 # + trusted=true
 #Holm-Bonferroni corrected thresholds
@@ -775,7 +840,7 @@ spon_country = exploratory_final[['euctr_id', 'nct_id', 'isrctn_id', 'journal_re
 #First for the EUCTR
 spon_country_reporting = crosstab(spon_country, 'euctr_results_inc', 'sponsor_country').reset_index()
 spon_country_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
-spon_country_reporting['prct_reported'] = spon_country_reporting.reported / spon_country_reporting['all']
+spon_country_reporting['prct_reported'] = round((spon_country_reporting.reported / spon_country_reporting['all'])*100,2)
 spon_country_reporting.sort_values(by='all', ascending=False)
 
 # + trusted=true
@@ -785,7 +850,7 @@ spon_country_reporting.sort_values(by='all', ascending=False)
 ct_gov_trials = spon_country[spon_country.nct_id.notnull()].reset_index(drop=True)
 ctg_reporting = crosstab(ct_gov_trials, 'ctgov_results_inc', 'sponsor_country').reset_index()
 ctg_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
-ctg_reporting['prct_reported'] = ctg_reporting.reported / ctg_reporting['all']
+ctg_reporting['prct_reported'] = round((ctg_reporting.reported / ctg_reporting['all'])*100,2)
 ctg_reporting.sort_values(by='all', ascending=False)
 
 # + trusted=true
@@ -800,14 +865,14 @@ isrctn_reporting.sort_values(by='all', ascending=False)
 #Journal Reporting
 journal_reporting = crosstab(spon_country, 'journal_results_inc', 'sponsor_country').reset_index()
 journal_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
-journal_reporting['prct_reported'] = journal_reporting.reported / journal_reporting['all']
+journal_reporting['prct_reported'] = round((journal_reporting.reported / journal_reporting['all'])*100,2)
 journal_reporting.sort_values(by='all', ascending=False)
 
 # + trusted=true
 #Any Reporting
 any_reporting = crosstab(spon_country, 'any_results_inc', 'sponsor_country').reset_index()
 any_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
-any_reporting['prct_reported'] = any_reporting.reported / any_reporting['all']
+any_reporting['prct_reported'] = round((any_reporting.reported / any_reporting['all'])*100,2)
 any_reporting.sort_values(by='all', ascending=False)
 # -
 
