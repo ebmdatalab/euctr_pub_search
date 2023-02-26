@@ -27,4 +27,4 @@ matplotlib_venn
 schemdraw
 venn
 upsetplot
-sklearn
+scikit-learn

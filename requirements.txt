@@ -30,6 +30,8 @@ beautifulsoup4==4.10.0
     # via nbconvert
 bleach==4.1.0
     # via nbconvert
+build==0.10.0
+    # via pip-tools
 cachetools==5.0.0
     # via google-auth
 certifi==2021.10.8
@@ -158,6 +160,8 @@ jinja2==3.0.3
     #   jupyterlab-server
     #   nbconvert
     #   notebook
+joblib==1.2.0
+    # via scikit-learn
 json5==0.9.6
     # via jupyterlab-server
 jsonschema==4.4.0
@@ -273,6 +277,7 @@ numpy==1.22.3
     #   pandas-gbq
     #   patsy
     #   pyarrow
+    #   scikit-learn
     #   scipy
     #   seaborn
     #   statsmodels
@@ -281,6 +286,7 @@ oauthlib==3.2.0
 packaging==21.3
     # via
     #   bleach
+    #   build
     #   db-dtypes
     #   google-cloud-bigquery
     #   jupyter-server
@@ -310,8 +316,6 @@ parso==0.8.3
     # via jedi
 patsy==0.5.2
     # via statsmodels
-pep517==0.12.0
-    # via pip-tools
 pexpect==4.8.0
     # via
     #   bash-kernel
@@ -320,7 +324,7 @@ pickleshare==0.7.5
     # via ipython
 pillow==9.0.1
     # via matplotlib
-pip-tools==6.5.1
+pip-tools==6.12.2
     # via -r requirements.in
 plotly==5.6.0
     # via -r requirements.in
@@ -382,6 +386,8 @@ pyparsing==3.0.7
     #   packaging
 pyproj==3.3.0
     # via geopandas
+pyproject-hooks==1.0.0
+    # via build
 pyrsistent==0.18.1
     # via jsonschema
 pytest==7.1.1
@@ -421,10 +427,13 @@ rsa==4.8
     # via google-auth
 schemdraw==0.14
     # via -r requirements.in
+scikit-learn==1.2.1
+    # via -r requirements.in
 scipy==1.8.0
     # via
     #   -r requirements.in
     #   matplotlib-venn
+    #   scikit-learn
     #   seaborn
     #   statsmodels
 seaborn==0.11.2
@@ -447,8 +456,6 @@ six==1.16.0
     #   patsy
     #   plotly
     #   python-dateutil
-sklearn==0.0.post1
-    # via -r requirements.in
 sniffio==1.2.0
     # via anyio
 soupsieve==2.3.1
@@ -467,11 +474,14 @@ terminado==0.13.3
     #   notebook
 testpath==0.6.0
     # via nbconvert
+threadpoolctl==3.1.0
+    # via scikit-learn
 toml==0.10.2
     # via jupytext
 tomli==2.0.1
     # via
-    #   pep517
+    #   build
+    #   pyproject-hooks
     #   pytest
 tornado==6.1
     # via
