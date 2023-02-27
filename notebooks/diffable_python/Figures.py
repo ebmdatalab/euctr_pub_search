@@ -67,7 +67,7 @@ with schemdraw.Drawing() as d:
 
 #d.save(parent + '/data/Figures/flowchart.jpg')
 # -
-# # Upset Plot
+# # Upset Plot for Results
 
 # + trusted=true
 from upsetplot import from_indicators, plot
@@ -97,11 +97,39 @@ plt.show()
 #fig.savefig(parent + '/data/Figures/upset_chart.jpg')
 # -
 
+# # Upset Plot for Registrations
+
+# + trusted=true
+import numpy as np
+
+# + trusted=true
+upset_reg_df = pd.read_csv(parent + '/data/graphing_data/upset_reg_data.csv').drop('Unnamed: 0', axis=1)
+
+# + trusted=true
+upset_reg_df['EUCTR Registration'] = True
+upset_reg_df['ClinicalTrials.gov Registration'] = np.where(upset_reg_df['nct_id'].notnull(), True, False)
+upset_reg_df['ISRCTN Registration'] = np.where(upset_reg_df['isrctn_id'].notnull(), True, False)
+
+# + trusted=true
+fig = plt.figure(figsize=(12, 7), dpi=300)
+plot(from_indicators(['EUCTR Registration', 'ClinicalTrials.gov Registration', 'ISRCTN Registration'],
+                      data=upset_reg_df), 
+     sort_by='degree', 
+     show_counts=True, 
+     fig=fig, 
+     element_size=None, 
+     totals_plot_elements=3
+    )
+
+plt.show()
+
+#fig.savefig(parent + '/data/Figures/upset_chart_reg.jpg')
+
+# + [markdown] tags=[]
 # # Start Year Graphs
 
 # + trusted=true
 from matplotlib.patches import Patch
-import numpy as np
 
 # + trusted=true
 graphing_df = pd.read_csv(parent + '/data/graphing_data/start_year_data.csv')

@@ -301,7 +301,7 @@ no_results[['euctr_id']].merge(regression[['Trial ID', 'Enrollment']], how='left
 #How many had results on just the EUCTR?
 just_euctr = len(euctr_results_ids - ctg_results_ids - isrctn_results_ids - journal_results_ids)
 print(f'{just_euctr} trials had results on just the EUCTR')
-ci_calc(just_euctr, len(euctr_results))
+summarizer(just_euctr, has_some_result)
 
 # + trusted=true
 #What did the distribution of documents look like for unique results
@@ -321,7 +321,7 @@ summarizer(3,54)
 #How many had results on just on ClinicalTrials.gov?
 just_ctg = len(ctg_results_ids - euctr_results_ids - isrctn_results_ids - journal_results_ids)
 print(f'{just_ctg} trials had results on just ClinicalTrials.gov')
-ci_calc(just_ctg,len(ctg_results))
+summarizer(just_ctg,has_some_result)
 
 # + trusted=true
 #How many had results on just on the ISRCTN?
@@ -332,7 +332,7 @@ print(f'{just_isrctn} trials had results on just the ISRCTN')
 #How many had results just in the literature?
 just_pub = len(journal_results_ids - euctr_results_ids - ctg_results_ids - isrctn_results_ids)
 print(f'{just_pub} trials had results only in a journal publication')
-ci_calc(just_pub,len(journal_results))
+summarizer(just_pub,has_some_result)
 
 # + trusted=true
 #How many have no results on the EUCTR but results anywhere else?
@@ -353,9 +353,16 @@ ci_calc(len(results_nowhere), len(analysis_df))
 # We will visualise these in an upset chart in the paper
 
 # + trusted=true
+analysis_df.columns
+
+# + trusted=true
 upset_plot_data = analysis_df[['euctr_results_inc', 'ctgov_results_inc', 'isrctn_results_inc', 'journal_results_inc']]
 
-upset_plot_data.to_csv(parent + '/data/graphing_data/upset_data.csv')
+#upset_plot_data.to_csv(parent + '/data/graphing_data/upset_data.csv')
+
+cross_reg_upset = analysis_df[['euctr_id', 'nct_id', 'isrctn_id']]
+
+#cross_reg_upset.to_csv(parent + '/data/graphing_data/upset_reg_data.csv')
 # -
 
 # # Data Quality, Completion Status, and Reporting
@@ -906,6 +913,5 @@ any_reporting.sort_values(by='all', ascending=False)
 
 
 
-# +
 
 
