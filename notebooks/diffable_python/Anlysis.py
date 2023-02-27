@@ -145,16 +145,6 @@ analysis_df.head()
 
 # + trusted=true
 full_sample.head()
-
-# + trusted=true
-temp = analysis_df.merge(full_sample[['eudract_number', 'inferred']], how='left', left_on='euctr_id', right_on='eudract_number')
-
-# + trusted=true
-temp2.columns
-
-# + trusted=true
-temp2 = temp[temp.inferred == 1]
-temp2[(temp2.nct_id.notnull()) | (temp2.isrctn_id.notnull()) | (temp2.journal_results_inc == 1)]
 # -
 
 # ## Results on the EUCTR
@@ -202,11 +192,27 @@ doc_types = ['CSR Synopsis',
              'Short Report', 
              'Report', 
              'Notice of termination with low enrollment']
-ci_calc(results_types[results_types.results_type.isin(doc_types)].euctr_results_format.sum(), total_found_euctr)
+summarizer(results_types[results_types.results_type.isin(doc_types)].euctr_results_format.sum(), total_found_euctr)
+
+# + trusted=true
+for doc in doc_types:
+    print(doc)
+    summarizer(results_types[results_types.results_type == doc].euctr_results_format.sum(), total_found_euctr)
+    print('\n')
+
+# + trusted=true
+#Tab and Journal
+
+ci_calc(7,264)
+
+# + trusted=true
+#Tab and CSR and Tab and Report
+
+ci_calc(5,264)
 
 # + trusted=true
 #Total with both Tabular and Document results
-ci_calc(results_types[~results_types.results_type.isin(doc_types + ['Tabular'])].euctr_results_format.sum(), total_found_euctr)
+summarizer(results_types[~results_types.results_type.isin(doc_types + ['Tabulara'])].euctr_results_format.sum(), total_found_euctr)
 # -
 
 # ## Cross-Registration and results availability on other registries
@@ -302,6 +308,14 @@ ci_calc(just_euctr, len(euctr_results))
 
 just_euctr_ids = euctr_results_ids - ctg_results_ids - isrctn_results_ids - journal_results_ids
 euctr_results[euctr_results.euctr_id.isin(just_euctr_ids)].euctr_results_format.value_counts()
+
+# + trusted=true
+euctr_results[euctr_results.euctr_id.isin(just_euctr_ids)].euctr_results_format.value_counts().sum()
+
+# + trusted=true
+#Values for appendix table
+
+summarizer(3,54)
 
 # + trusted=true
 #How many had results on just on ClinicalTrials.gov?
@@ -815,9 +829,20 @@ simple_logistic_regression(y_reg1, x_reg1)
 # `trial_start_yr`, `enrollment`, `protocol_country`, `location_EEA and Non-EEA`, `location_Non-EEA`, `sponsor_status_Commercial`
 
 # + trusted=true
-x_regu = regression_final[['location_EEA and Non-EEA', 'location_Non-EEA']].reset_index(drop=True)
+x_regu = regression_final[['enrollment']].reset_index(drop=True)
 
 simple_logistic_regression(y_reg1, x_regu)
+# -
+
+# p-values uni:
+# com spon: <0.00001
+# nonEEA: <0.0001
+# prot_country: <0.0001
+# enrollment: .05
+# start_yr: 0.17209
+# EEA/NonEEA: .02412
+#
+#
 
 # + trusted=true
 #Holm-Bonferroni corrected thresholds
@@ -881,5 +906,6 @@ any_reporting.sort_values(by='all', ascending=False)
 
 
 
+# +
 
 

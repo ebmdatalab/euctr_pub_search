@@ -93,12 +93,15 @@ plot(from_indicators(["EUCTR", "ClinicalTrials.gov", "ISRCTN", "Journal Publicat
     )
 
 plt.show()
+
+#fig.savefig(parent + '/data/Figures/upset_chart.jpg')
 # -
 
 # # Start Year Graphs
 
 # + trusted=true
 from matplotlib.patches import Patch
+import numpy as np
 
 # + trusted=true
 graphing_df = pd.read_csv(parent + '/data/graphing_data/start_year_data.csv')
@@ -160,7 +163,7 @@ plt.tight_layout()
 plt.subplots_adjust(hspace=.3)
 plt.show()
 
-#fig.savefig('unreported_trials.png')
+#fig.savefig(parent + '/data/Figures/start_year_results.jpg')
 # -
 
 
