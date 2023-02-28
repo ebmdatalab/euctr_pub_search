@@ -218,7 +218,13 @@ summarizer(results_types[~results_types.results_type.isin(doc_types + ['Tabulara
 # ## Cross-Registration and results availability on other registries
 
 # + trusted=true
-#First we'll look at cross-registration on ClinicalTrials.gov
+#First we looks at unique registrations to the EUCTR
+euctr_only_reg = analysis_df[analysis_df.nct_id.isna() & analysis_df.isrctn_id.isna()]
+print(f'Out of {len(analysis_df)} trials {len(euctr_only_reg)} were cross-registered on the EUCTR')
+ci_calc(len(euctr_only_reg), len(analysis_df))
+
+# + trusted=true
+#Now we'll look at cross-registration on ClinicalTrials.gov
 ctg_xreg = analysis_df[analysis_df.nct_id.notnull()]
 print(f'Out of {len(analysis_df)} trials {len(ctg_xreg)} were cross-registered on ClinicalTrials.gov')
 ci_calc(len(ctg_xreg),len(analysis_df))
@@ -913,5 +919,6 @@ any_reporting.sort_values(by='all', ascending=False)
 
 
 
+# +
 
 
