@@ -21,6 +21,9 @@ import os
 cwd = os.getcwd()
 parent = str(Path(cwd).parents[0])
 sys.path.append(parent)
+# -
+
+# # Flow Chart for Sample
 
 # + trusted=true
 import schemdraw
@@ -183,7 +186,7 @@ ax2.set_yticks(range(0,61,10))
 plt.title('b. Distribution of Unreported EUCTR Results by Start Year')
 
 legend_elements = [Patch(facecolor='#1f77b4',label='Unreported Trials'), 
-                   Patch(facecolor='#ff7f0e',label='All Trials', alpha=.3)]
+                   Patch(facecolor='#ff7f0e',label='Full Sample', alpha=.3)]
 
 fig.legend(handles=legend_elements, loc=1, bbox_to_anchor=(.985,.95))
 
@@ -193,6 +196,69 @@ plt.show()
 
 #fig.savefig(parent + '/data/Figures/start_year_results.jpg')
 # -
+# # K-M plots for next reported
+
+# + trusted=true
+from lifelines import KaplanMeierFitter
+
+# + trusted=true
+km_df = pd.read_csv(parent + '/data/graphing_data/time_next_pub.csv')
+
+# + trusted=true
+yticks = list(np.arange(0,1.1,.1))
+fig = plt.figure(dpi=300)
+ax = plt.subplot()
+
+euctr_data = km_df[km_df.earliest_results == 'EUCTR'].time_to_second_pub
+euctr_censor = km_df[km_df.earliest_results == 'EUCTR']['censored']
+
+curve_1 = KaplanMeierFitter()
+curve_1.fit(euctr_data, euctr_censor, label='Appeared on EUCTR First')
+ax = curve_1.plot_cumulative_density(ci_show=False, 
+                                     yticks=yticks, 
+                                     figsize=(15,10), 
+                                     grid=True, 
+                                     lw = 2.5, 
+                                     ax=ax, 
+                                     show_censors=True)
+
+ctg_data = km_df[km_df.earliest_results == 'CTgov'].time_to_second_pub
+ctg_censor = km_df[km_df.earliest_results == 'CTgov']['censored']
+
+curve_2 = KaplanMeierFitter()
+curve_2.fit(ctg_data, ctg_censor, label='Appeared on CTG First')
+ax = curve_2.plot_cumulative_density(ci_show=False, 
+                                     yticks=yticks, 
+                                     figsize=(15,10), 
+                                     grid=True, 
+                                     lw = 2.5, 
+                                     ax=ax, 
+                                     show_censors=True)
+
+pub_data = km_df[km_df.earliest_results == 'Journal'].time_to_second_pub
+pub_censor = km_df[km_df.earliest_results == 'Journal']['censored']
+
+curve_3 = KaplanMeierFitter()
+curve_3.fit(pub_data, pub_censor, label='Appeared in a Journal First')
+ax = curve_3.plot_cumulative_density(ci_show=False, 
+                                     yticks=yticks, 
+                                     figsize=(15,10), 
+                                     grid=True, 
+                                     lw = 2.5, 
+                                     ax=ax, 
+                                     show_censors=True)
+
+ax.legend(fontsize = 16)
+plt.ylabel('Proportion Reported in a Second Dissemination Route', labelpad=10, fontsize=14)
+plt.xlabel('Days to Results on Second Dissemination Route', labelpad=10, fontsize=14)
+
+from lifelines.plotting import add_at_risk_counts
+add_at_risk_counts(curve_1, curve_2, curve_3, rows_to_show = ['At risk'], ax=ax)
+plt.tight_layout()
+
+#plt.savefig(parent + '/data/Figures/time_to_next_results.jpg')
+# -
+
 
 
 

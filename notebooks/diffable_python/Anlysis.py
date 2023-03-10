@@ -203,7 +203,7 @@ for doc in doc_types:
 # + trusted=true
 #Tab and Journal
 
-ci_calc(7,264)
+ci_calc(17,265)
 
 # + trusted=true
 #Tab and CSR and Tab and Report
@@ -212,7 +212,7 @@ ci_calc(5,264)
 
 # + trusted=true
 #Total with both Tabular and Document results
-summarizer(results_types[~results_types.results_type.isin(doc_types + ['Tabulara'])].euctr_results_format.sum(), total_found_euctr)
+summarizer(results_types[~results_types.results_type.isin(doc_types + ['Tabular'])].euctr_results_format.sum(), total_found_euctr)
 # -
 
 # ## Cross-Registration and results availability on other registries
@@ -220,7 +220,7 @@ summarizer(results_types[~results_types.results_type.isin(doc_types + ['Tabulara
 # + trusted=true
 #First we looks at unique registrations to the EUCTR
 euctr_only_reg = analysis_df[analysis_df.nct_id.isna() & analysis_df.isrctn_id.isna()]
-print(f'Out of {len(analysis_df)} trials {len(euctr_only_reg)} were cross-registered on the EUCTR')
+print(f'Out of {len(analysis_df)} trials {len(euctr_only_reg)} were only on the EUCTR')
 ci_calc(len(euctr_only_reg), len(analysis_df))
 
 # + trusted=true
@@ -318,10 +318,10 @@ euctr_results[euctr_results.euctr_id.isin(just_euctr_ids)].euctr_results_format.
 # + trusted=true
 euctr_results[euctr_results.euctr_id.isin(just_euctr_ids)].euctr_results_format.value_counts().sum()
 
-# + trusted=true
-#Values for appendix table
+# + tags=[] trusted=true
+# Values for appendix table
 
-summarizer(3,54)
+summarizer(1,55)
 
 # + trusted=true
 #How many had results on just on ClinicalTrials.gov?
@@ -373,7 +373,7 @@ cross_reg_upset = analysis_df[['euctr_id', 'nct_id', 'isrctn_id']]
 
 # # Data Quality, Completion Status, and Reporting
 #
-# For overall population numbers, see the `Data Processing` notebooke
+# For overall population numbers, see the `Data Processing` notebook
 
 # + trusted=true
 #Making a new DF for this population to investiage results availability by inferred and available completion dates
@@ -531,117 +531,131 @@ print(pval)
 # -
 
 # # Publication Date Analysis
+#
+# Due to the very low number of results, all but 1 of which was never the earliest, we are excluding ISRCTN from this analysis. You can verify this fact below using the original date_df dataframe.
 
 # + trusted=true
-date_df = analysis_df[['euctr_id', 'euctr_results', 'euctr_results_date', 'nct_id', 'ctgov_results', 'ctgov_results_date', 
-             'isrctn_id', 'isrctn_results', 'isrctn_results_date', 'journal_result', 'journal_pub_date']].reset_index(drop=True)
+date_df = analysis_df[['euctr_id', 'euctr_results_inc', 'euctr_results_date', 'nct_id', 'ctgov_results_inc', 'ctgov_results_date', 
+             'isrctn_id', 'isrctn_results_inc', 'isrctn_results_date', 'journal_results_inc', 'journal_pub_date']].reset_index(drop=True)
 
-earliest_results_date = dec_results.first_version_date.min()
+
+#This is the earliest results available on the EUCTR
+earliest_euctr_results_date = dec_results.first_version_date.min()
+print(earliest_euctr_results_date)
 
 # + trusted=true
-#Sense checking to make sure there are no duplicate values
-just_dates = date_df[['euctr_results_date','ctgov_results_date', 'isrctn_results_date', 'journal_pub_date']].reset_index(drop=True)
+#It's probably easiest to just blank out any dates of results that are excluded to make life easier
+#We'll also remove ISRCTN
+#Making a fresh copy so we can compare for sanity checks
+
+date_df2 = date_df.drop(['isrctn_id', 'isrctn_results_inc', 'isrctn_results_date'], axis=1).reset_index(drop=True)
+
+date_df2['euctr_results_date'] = pd.to_datetime(np.where((date_df2.euctr_results_inc == 0) & date_df2.euctr_results_date.notnull(), pd.NaT, date_df2.euctr_results_date))
+
+date_df2['ctgov_results_date'] = pd.to_datetime(np.where((date_df2.ctgov_results_inc == 0) & date_df2.ctgov_results_date.notnull(), pd.NaT, date_df2.ctgov_results_date))
+
+date_df2['journal_pub_date'] = pd.to_datetime(np.where((date_df2.journal_results_inc == 0) & date_df2.journal_pub_date.notnull(), pd.NaT, date_df2.journal_pub_date))
+
+# + trusted=true
+#Sense checking to make sure there are no duplicate date values for when we take mins and maxes
+just_dates = date_df2[['euctr_results_date','ctgov_results_date', 'journal_pub_date']].reset_index(drop=True)
 just_dates['test'] = just_dates.apply(check_dupes, axis=1)
 just_dates.test.value_counts()
 
 #There are no repeat dates so no need to worry about that.
 
 # + trusted=true
-#Getting rid of results dates from after we started searching
-date_df['euctr_results_date'] = np.where(date_df['euctr_results_date'] > search_start_date, pd.NaT, date_df['euctr_results_date'])
-date_df['euctr_results_date'] = pd.to_datetime(date_df['euctr_results_date'])
-
-date_df['ctgov_results_date'] = np.where(date_df['ctgov_results_date'] > search_start_date, pd.NaT, date_df['ctgov_results_date'])
-date_df['ctgov_results_date'] = pd.to_datetime(date_df['ctgov_results_date'])
-
-date_df['isrctn_results_date'] = np.where(date_df['isrctn_results_date'] > search_start_date, pd.NaT, date_df['isrctn_results_date'])
-date_df['isrctn_results_date'] = pd.to_datetime(date_df['isrctn_results_date'])
-
-date_df['journal_pub_date'] = np.where(date_df['journal_pub_date'] > search_start_date, pd.NaT, date_df['journal_pub_date'])
-date_df['journal_pub_date'] = pd.to_datetime(date_df['journal_pub_date'])
-
-# + trusted=true
-#Getting the earliest publication date for each trial
-date_df['min_date'] = date_df[['euctr_results_date',
+#Getting the earliest and latest publication dates
+date_df2['min_date'] = date_df2[['euctr_results_date',
                                'ctgov_results_date', 
-                               'isrctn_results_date', 
                                'journal_pub_date']].min(axis=1)
 
-# + trusted=true
-#Getting the total number of results available
-date_df['results_counts'] = (date_df == 'Yes').T.sum()
-
-# + [markdown] tags=[]
-# ## Pre-EUCTR Results Section trials
+date_df2['max_date'] = date_df2[['euctr_results_date',
+                               'ctgov_results_date', 
+                               'journal_pub_date']].max(axis=1)
 
 # + trusted=true
-#Trials that had a result of some kind before the EUCTR results section launched
-pre_euctr = date_df[(date_df.min_date < earliest_results_date)].reset_index(drop=True)
+#Getting the total number of results available 
+date_df2['results_counts'] = (date_df2[['euctr_results_inc', 'ctgov_results_inc', 'journal_results_inc']].T.sum())
+# -
+
+# # Pre-EUTR Reporting
+
+# + trusted=true
+#Trials that had a result of some kind before the earliest available EUCTR results date
+pre_euctr = date_df2[(date_df2.min_date < earliest_euctr_results_date)].reset_index(drop=True)
 
 print(len(pre_euctr))
 
 # + trusted=true
 #How many of these went on the publish a result on the EUCTR
 
-print(len(pre_euctr[pre_euctr.euctr_results == 'Yes']))
+print(len(pre_euctr[pre_euctr.euctr_results_inc == 1]))
 
-ci_calc(95,135)
+ci_calc(93,135)
+
+# + trusted=true
+#Lets drop ones that published before the launch of the ClinicalTrials.gov Results section launch in September 2008 
+#as this wouldn't be a fair comparison. It looks like the results section launched at the end of September so we'll
+#Exclude anything first in a journal before October as that was the only route available.
+
+pre_euctr_post_ctg = pre_euctr[pre_euctr.journal_pub_date > pd.to_datetime('2008-09-30')].reset_index(drop=True)
+
+print(len(pre_euctr_post_ctg))
 
 # + trusted=true
 #Here we can extract where the earliest result was extracted for a given trial
 
-conds = [pre_euctr.euctr_results_date == pre_euctr.min_date, 
-         pre_euctr.ctgov_results_date == pre_euctr.min_date, 
-         pre_euctr.isrctn_results_date == pre_euctr.min_date, 
-         pre_euctr.journal_pub_date == pre_euctr.min_date]
+conds = [pre_euctr_post_ctg.euctr_results_date == pre_euctr_post_ctg.min_date, 
+         pre_euctr_post_ctg.ctgov_results_date == pre_euctr_post_ctg.min_date, 
+         pre_euctr_post_ctg.journal_pub_date == pre_euctr_post_ctg.min_date]
 
-out = ['EUCTR', 'CTgov', 'ISRCTN', 'Journal']
+out = ['EUCTR', 'CTgov', 'Journal']
 
-pre_euctr['earliest_results'] = np.select(conds, out, 'No Result')
+pre_euctr_post_ctg['earliest_results'] = np.select(conds, out, 'No Result')
 
 # + trusted=true
 #Lets now look at the distribution of where trials were first to report prior to the EUCTR
 #This has to be limited to only trials that were also cross-registered on ClinicalTrials.gov to compare
 #like with like
-first_report_pre = pre_euctr[pre_euctr.nct_id.notnull()].earliest_results.value_counts()
+first_report_pre = pre_euctr_post_ctg[pre_euctr_post_ctg.nct_id.notnull()].earliest_results.value_counts()
 first_report_pre
 
 # + trusted=true
 #Can use this to get the CIs for those
 #Journals
-ci_calc(first_report_pre[0],first_report_pre.sum())
+summarizer(first_report_pre[0],first_report_pre.sum())
 
 # + trusted=true
 #CT gov
-ci_calc(first_report_pre[1],first_report_pre.sum())
+summarizer(first_report_pre[1],first_report_pre.sum())
+# -
 
-# + [markdown] tags=[]
-# ## Post-EUCTR Results Section Trials
+# # Post-EUTR Reporting
 
 # + trusted=true
 #Make the sample
-post_euctr = date_df[(date_df.min_date >= earliest_results_date)].reset_index(drop=True)
+post_euctr = date_df2[(date_df2.min_date >= earliest_euctr_results_date)].reset_index(drop=True)
 
 #Trials with any result after the launch of the EUCTR results section
 print(len(post_euctr))
 
 # + trusted=true
 #How many of these ended up on the EUCTR at all
-len(post_euctr[post_euctr.euctr_results == 'Yes'])
+len(post_euctr[post_euctr.euctr_results_inc == 1])
 
 # + trusted=true
 #And the CI for that
-ci_calc(len(post_euctr[post_euctr.euctr_results == 'Yes']),len(post_euctr))
+summarizer(len(post_euctr[post_euctr.euctr_results_inc == 1]),len(post_euctr))
 
 # + trusted=true
 #Adding the earliest dissemination route
 
 conds = [post_euctr.euctr_results_date == post_euctr.min_date, 
          post_euctr.ctgov_results_date == post_euctr.min_date, 
-         post_euctr.isrctn_results_date == post_euctr.min_date, 
          post_euctr.journal_pub_date == post_euctr.min_date]
 
-out = ['EUCTR', 'CTgov', 'ISRCTN', 'Journal']
+out = ['EUCTR', 'CTgov', 'Journal']
 
 post_euctr['earliest_results'] = np.select(conds, out, 'No Result')
 
@@ -654,34 +668,66 @@ first_report_post.sum()
 
 # + trusted=true
 #Journal CIs
-ci_calc(first_report_post[0], first_report_post.sum())
+summarizer(first_report_post[0], first_report_post.sum())
 
 # + trusted=true
 #EUCTR CIs
-ci_calc(first_report_post[1], first_report_post.sum())
+summarizer(first_report_post[1], first_report_post.sum())
 
 # + trusted=true
 #CTG CIs
-ci_calc(first_report_post[2], first_report_post.sum())
+summarizer(first_report_post[2], first_report_post.sum())
 
 # + trusted=true
 #What about trials not on ClinicalTrials.gov.
-#We can ignore the trial with the earliest ISRCTN result here
 first_pub_no_ctg = post_euctr[(post_euctr.nct_id.isna())].earliest_results.value_counts()
 first_pub_no_ctg
 
 # + trusted=true
 #CI for journal
-ci_calc(first_pub_no_ctg[0],first_pub_no_ctg.sum() - 1)
+summarizer(first_pub_no_ctg[0],first_pub_no_ctg.sum())
 
 # + trusted=true
 #CI for EUCTR
-ci_calc(first_pub_no_ctg[1],first_pub_no_ctg.sum()- 1)
+summarizer(first_pub_no_ctg[1],first_pub_no_ctg.sum())
+# -
+
+# # Data For Time to Reporting Across Routes
 
 # + trusted=true
-#CI for ISRCTN
-ci_calc(first_pub_no_ctg[2],first_pub_no_ctg.sum())
+#So this is everything that could have appeared in all three places
+
+results_compare = post_euctr[post_euctr.nct_id.notnull()].reset_index(drop=True)
+
+# + trusted=true
+#This makes it so we can get the next result for any given first result.
+conds_t = [results_compare.results_counts == 1, 
+         results_compare.results_counts == 2,
+         results_compare.results_counts == 3]
+
+out_t = [pd.NaT,
+         results_compare.max_date,
+         results_compare[['euctr_results_date', 'ctgov_results_date', 'journal_pub_date']].median(axis=1, numeric_only=False)]
+
+results_compare['next_result'] = np.select(conds_t, out_t)
+results_compare['next_result'] = pd.to_datetime(results_compare['next_result']).dt.date
+
+#creating the censoring variable
+results_compare['censored'] = np.where((results_compare.results_counts == 1), 1, 0)
+
+#need to do this because of weirdness with mixed types
+results_compare['next_result'] = results_compare['next_result'].replace(pd.NaT, search_start_date.date())
+results_compare['next_result'] = pd.to_datetime(results_compare['next_result'])
+
+# + trusted=true
+results_compare['time_to_second_pub'] = (results_compare.next_result - results_compare.min_date) / pd.Timedelta('1 day')
+
+# + trusted=true
+#Output for use in the Figures notebook
+
+results_compare.to_csv(parent + '/data/graphing_data/time_next_pub.csv')
 # -
+
 
 # ## Data for Start Year Figure
 #
@@ -747,7 +793,7 @@ isrctn_id_match
 summarizer(isrctn_id_match.filter(like='ISRCTN').sum(), len(isrctn_pub_ids))
 # -
 
-# # Exploratory Analayses
+# # Exploratory Analyses
 
 # + trusted=true
 #Creating the exploratory analysis dataset through merging a few different DFs 
@@ -824,7 +870,7 @@ x_reg = regression_final[['inferred', 'trial_start_yr', 'enrollment',
 simple_logistic_regression(y_reg, x_reg)
 # -
 
-# If we run the regression per protocol it will not converge because, as shown earlier, no trials with inferred completion dates have a result on the EUCTR making that a perfect predictor. I will therefore remove this from the regression as it is a derived variable anyway.
+# If we run the regression per protocol it leads to some funky results because of only including 1 trial with inferred results, as shown earlier. I will therefore remove this from the regression as it is a derived variable anyway.
 
 # + trusted=true
 #Re-running the regression without the "inferred" variable
@@ -842,7 +888,7 @@ simple_logistic_regression(y_reg1, x_reg1)
 # `trial_start_yr`, `enrollment`, `protocol_country`, `location_EEA and Non-EEA`, `location_Non-EEA`, `sponsor_status_Commercial`
 
 # + trusted=true
-x_regu = regression_final[['enrollment']].reset_index(drop=True)
+x_regu = regression_final[['trial_start_yr']].reset_index(drop=True)
 
 simple_logistic_regression(y_reg1, x_regu)
 # -
@@ -919,6 +965,5 @@ any_reporting.sort_values(by='all', ascending=False)
 
 
 
-# +
 
 
