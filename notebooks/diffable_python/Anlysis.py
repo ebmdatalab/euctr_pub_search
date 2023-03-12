@@ -709,23 +709,23 @@ out_t = [pd.NaT,
          results_compare.max_date,
          results_compare[['euctr_results_date', 'ctgov_results_date', 'journal_pub_date']].median(axis=1, numeric_only=False)]
 
-results_compare['next_result'] = np.select(conds_t, out_t)
-results_compare['next_result'] = pd.to_datetime(results_compare['next_result']).dt.date
+results_compare['next_result_date'] = np.select(conds_t, out_t)
+results_compare['next_result_date'] = pd.to_datetime(results_compare['next_result_date']).dt.date
 
 #creating the censoring variable
-results_compare['censored'] = np.where((results_compare.results_counts == 1), 1, 0)
+results_compare['next_result'] = np.where((results_compare.results_counts == 1), 0, 1)
 
 #need to do this because of weirdness with mixed types
-results_compare['next_result'] = results_compare['next_result'].replace(pd.NaT, search_start_date.date())
-results_compare['next_result'] = pd.to_datetime(results_compare['next_result'])
+results_compare['next_result_date'] = results_compare['next_result_date'].replace(pd.NaT, search_start_date.date())
+results_compare['next_result_date'] = pd.to_datetime(results_compare['next_result_date'])
 
 # + trusted=true
-results_compare['time_to_second_pub'] = (results_compare.next_result - results_compare.min_date) / pd.Timedelta('1 day')
+results_compare['time_to_second_pub'] = (results_compare.next_result_date - results_compare.min_date) / pd.Timedelta('1 day')
 
 # + trusted=true
 #Output for use in the Figures notebook
 
-results_compare.to_csv(parent + '/data/graphing_data/time_next_pub.csv')
+#results_compare.to_csv(parent + '/data/graphing_data/time_next_pub.csv')
 # -
 
 
@@ -740,7 +740,7 @@ graphing_df = analysis_df[['euctr_id',
                                                                  'Trial Start Year']], 
                                                     how='left', left_on='euctr_id', right_on='Trial ID').drop('Trial ID', axis=1)
 
-graphing_df.to_csv(parent + '/data/graphing_data/start_year_data.csv')
+#graphing_df.to_csv(parent + '/data/graphing_data/start_year_data.csv')
 # -
 
 # # Reporting of Trial IDs
@@ -965,5 +965,6 @@ any_reporting.sort_values(by='all', ascending=False)
 
 
 
+# +
 
 

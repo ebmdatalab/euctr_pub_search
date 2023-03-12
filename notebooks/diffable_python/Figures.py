@@ -210,7 +210,7 @@ fig = plt.figure(dpi=300)
 ax = plt.subplot()
 
 euctr_data = km_df[km_df.earliest_results == 'EUCTR'].time_to_second_pub
-euctr_censor = km_df[km_df.earliest_results == 'EUCTR']['censored']
+euctr_censor = km_df[km_df.earliest_results == 'EUCTR']['next_result']
 
 curve_1 = KaplanMeierFitter()
 curve_1.fit(euctr_data, euctr_censor, label='Appeared on EUCTR First')
@@ -223,7 +223,7 @@ ax = curve_1.plot_cumulative_density(ci_show=False,
                                      show_censors=True)
 
 ctg_data = km_df[km_df.earliest_results == 'CTgov'].time_to_second_pub
-ctg_censor = km_df[km_df.earliest_results == 'CTgov']['censored']
+ctg_censor = km_df[km_df.earliest_results == 'CTgov']['next_result']
 
 curve_2 = KaplanMeierFitter()
 curve_2.fit(ctg_data, ctg_censor, label='Appeared on CTG First')
@@ -236,7 +236,7 @@ ax = curve_2.plot_cumulative_density(ci_show=False,
                                      show_censors=True)
 
 pub_data = km_df[km_df.earliest_results == 'Journal'].time_to_second_pub
-pub_censor = km_df[km_df.earliest_results == 'Journal']['censored']
+pub_censor = km_df[km_df.earliest_results == 'Journal']['next_result']
 
 curve_3 = KaplanMeierFitter()
 curve_3.fit(pub_data, pub_censor, label='Appeared in a Journal First')
@@ -262,5 +262,6 @@ plt.tight_layout()
 
 
 
+# +
 
 
