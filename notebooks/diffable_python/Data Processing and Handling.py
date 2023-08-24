@@ -397,7 +397,7 @@ replacement_pop = final_df[~(final_df.eudract_number.isin(sample.eudract_number.
 
 # + trusted=true
 #And take a sample
-replacement_sample = replacement_pop.sample(20, random_state=6377)
+replacement_sample = replacement_pop.sample(22, random_state=6377)
 
 # + trusted=true
 #Uncomment this to save the file
@@ -405,7 +405,7 @@ replacement_sample = replacement_pop.sample(20, random_state=6377)
 #replacement_sample.to_csv(parent + '/data/samples/' + 'replacement_sample.csv')
 
 # + trusted=true
-replacement_sample.head(20)
+replacement_sample.head(25)
 # -
 
 # # Data for Regression
@@ -438,7 +438,7 @@ prot_counts = spon_df_filt_no3rd[['trial_id', 'protocol_country']].drop_duplicat
 spon_df_filt[spon_df_filt.sponsor_status == 'No Data Available']
 
 # + trusted=true
-#We can manually check variation in the "sponsor_status" column to see which has mixed information
+#We can manually check variation in the "sponsor_status" column to see which have mixed information
 spon_df_filt[['trial_id', 'sponsor_status']].groupby('trial_id').nunique().sort_values(by='sponsor_status', ascending=False).head()
 
 # + trusted=true
@@ -540,6 +540,5 @@ final_df.head()
 
 
 
-# +
 
 

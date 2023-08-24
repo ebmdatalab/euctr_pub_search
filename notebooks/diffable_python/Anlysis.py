@@ -19,6 +19,8 @@ import pandas as pd
 import numpy as np
 from statsmodels.stats.proportion import proportions_ztest, proportions_chisquare
 import statsmodels.api as sm
+from scipy.stats import median_test
+import matplotlib.pyplot as plt
 
 # + trusted=true
 import sys
@@ -34,7 +36,7 @@ sys.path.append(parent)
 from lib.functions import ci_calc, z_test, summarizer, check_dupes, simple_logistic_regression, crosstab
 
 #ci_calc will compute a simple confidence interval around a proportion
-#summarizer gives a nice output of proportions and CIs and returns and item with them
+#summarizer returns a nice output of proportions and CIs
 #check_dupes helps with the date analysis
 #simple_logicstic_regression and crosstab do what they say on the tin
 # -
@@ -69,7 +71,7 @@ dec_results['first_version_date'] = pd.to_datetime(dec_results.first_version_dat
 #Setting search reference dates
 search_start_date = pd.to_datetime('2020-12-11')
 primary_search_completion_date = pd.to_datetime('2021-07-22')
-last_search_any = pd.to_datetime('2023-01-03')
+last_search_any = pd.to_datetime('2023-08-16')
 # -
 
 # # Analysis Prep
@@ -139,12 +141,6 @@ analysis_df.to_csv(parent + '/data/final_dataset/' + 'analysis_df.csv')
 
 # + [markdown] tags=[]
 # # Main Analysis
-
-# + trusted=true
-analysis_df.head()
-
-# + trusted=true
-full_sample.head()
 # -
 
 # ## Results on the EUCTR
@@ -191,7 +187,7 @@ doc_types = ['CSR Synopsis',
              'Journal Article', 
              'Short Report', 
              'Report', 
-             'Notice of termination with low enrollment']
+             'Notice of no analysis']
 summarizer(results_types[results_types.results_type.isin(doc_types)].euctr_results_format.sum(), total_found_euctr)
 
 # + trusted=true
@@ -201,14 +197,19 @@ for doc in doc_types:
     print('\n')
 
 # + trusted=true
-#Tab and Journal
+#Reports
 
-ci_calc(17,265)
+ci_calc(10,266)
+
+# + trusted=true
+#Tab and Document
+
+ci_calc(16,266)
 
 # + trusted=true
 #Tab and CSR and Tab and Report
 
-ci_calc(5,264)
+ci_calc(5,266)
 
 # + trusted=true
 #Total with both Tabular and Document results
@@ -352,14 +353,19 @@ ci_calc(len(not_euctr), len(analysis_df))
 #How many had results nowhere?
 print(f'{len(results_nowhere)} trials had no results located')
 ci_calc(len(results_nowhere), len(analysis_df))
+
+# + trusted=true
+#How many trials had results somewhere that wasn't the EUCTR
+outside_euctr = analysis_df[((analysis_df.ctgov_results_inc == 1) | 
+                             (analysis_df.isrctn_results_inc == 1) | 
+                             (analysis_df.journal_results_inc == 1))]
+print(f'{len(outside_euctr)} had a result outside the EUCTR')
+ci_calc(len(outside_euctr), len(analysis_df))
 # -
 
 # ## Getting data on combinations of results availability
 #
 # We will visualise these in an upset chart in the paper
-
-# + trusted=true
-analysis_df.columns
 
 # + trusted=true
 upset_plot_data = analysis_df[['euctr_results_inc', 'ctgov_results_inc', 'isrctn_results_inc', 'journal_results_inc']]
@@ -431,8 +437,8 @@ b = [len(inferred),len(stated)]
 
 stat, pval = proportions_ztest(a, b)
 print(pval)
-# -
 
+# + [markdown] tags=[]
 # ## Now we have to do this for each registry
 
 # + trusted=true
@@ -579,155 +585,79 @@ date_df2['max_date'] = date_df2[['euctr_results_date',
 date_df2['results_counts'] = (date_df2[['euctr_results_inc', 'ctgov_results_inc', 'journal_results_inc']].T.sum())
 # -
 
-# # Pre-EUTR Reporting
+# # Time to Reporting
 
 # + trusted=true
-#Trials that had a result of some kind before the earliest available EUCTR results date
-pre_euctr = date_df2[(date_df2.min_date < earliest_euctr_results_date)].reset_index(drop=True)
-
-print(len(pre_euctr))
-
-# + trusted=true
-#How many of these went on the publish a result on the EUCTR
-
-print(len(pre_euctr[pre_euctr.euctr_results_inc == 1]))
-
-ci_calc(93,135)
-
-# + trusted=true
-#Lets drop ones that published before the launch of the ClinicalTrials.gov Results section launch in September 2008 
-#as this wouldn't be a fair comparison. It looks like the results section launched at the end of September so we'll
-#Exclude anything first in a journal before October as that was the only route available.
-
-pre_euctr_post_ctg = pre_euctr[pre_euctr.journal_pub_date > pd.to_datetime('2008-09-30')].reset_index(drop=True)
-
-print(len(pre_euctr_post_ctg))
-
-# + trusted=true
-#Here we can extract where the earliest result was extracted for a given trial
-
-conds = [pre_euctr_post_ctg.euctr_results_date == pre_euctr_post_ctg.min_date, 
-         pre_euctr_post_ctg.ctgov_results_date == pre_euctr_post_ctg.min_date, 
-         pre_euctr_post_ctg.journal_pub_date == pre_euctr_post_ctg.min_date]
+conds = [date_df2.euctr_results_date == date_df2.min_date, 
+         date_df2.ctgov_results_date == date_df2.min_date, 
+         date_df2.journal_pub_date == date_df2.min_date]
 
 out = ['EUCTR', 'CTgov', 'Journal']
 
-pre_euctr_post_ctg['earliest_results'] = np.select(conds, out, 'No Result')
+date_df2['earliest_results'] = np.select(conds, out, 'No Result')
 
 # + trusted=true
-#Lets now look at the distribution of where trials were first to report prior to the EUCTR
-#This has to be limited to only trials that were also cross-registered on ClinicalTrials.gov to compare
-#like with like
-first_report_pre = pre_euctr_post_ctg[pre_euctr_post_ctg.nct_id.notnull()].earliest_results.value_counts()
-first_report_pre
+# All Trials
+
+date_df2[date_df2.nct_id.notnull()].earliest_results.value_counts()
 
 # + trusted=true
-#Can use this to get the CIs for those
-#Journals
-summarizer(first_report_pre[0],first_report_pre.sum())
+summarizer(156,291)
 
 # + trusted=true
-#CT gov
-summarizer(first_report_pre[1],first_report_pre.sum())
+#Those with a first results
+
+date_df2[(date_df2.nct_id.notnull()) & (date_df2.min_date < earliest_euctr_results_date) & (date_df2.journal_pub_date > pd.to_datetime('2008-09-30'))].earliest_results.value_counts()
+
+# + trusted=true
+summarizer(23,87)
+
+# + trusted=true
+date_df2[(date_df2.nct_id.notnull()) & (date_df2.min_date >= earliest_euctr_results_date)].earliest_results.value_counts()
+
+# + trusted=true
+summarizer(89,193)
 # -
 
-# # Post-EUTR Reporting
+# # Data for Time to Reporting K-M Curves
+#
+# Code for medians and 95% CIs were done in the `Figures` notebook
 
 # + trusted=true
 #Make the sample
 post_euctr = date_df2[(date_df2.min_date >= earliest_euctr_results_date)].reset_index(drop=True)
 
-#Trials with any result after the launch of the EUCTR results section
+#Trials with a first result only after the launch of the EUCTR results section
 print(len(post_euctr))
 
 # + trusted=true
-#How many of these ended up on the EUCTR at all
-len(post_euctr[post_euctr.euctr_results_inc == 1])
+km_df = post_euctr.merge(full_sample, how='left', left_on='euctr_id', right_on='eudract_number')
+
+km_df['final_date'] = pd.to_datetime(km_df['final_date'])
 
 # + trusted=true
-#And the CI for that
-summarizer(len(post_euctr[post_euctr.euctr_results_inc == 1]),len(post_euctr))
+km_df['euctr_days'] = (km_df['euctr_results_date'] - km_df['final_date']) / pd.Timedelta(1,"d")
+
+km_df['euctr_days'] = np.where(km_df['euctr_days'].isna(), 
+                               (search_start_date - km_df['final_date']) / pd.Timedelta(1,"d"),
+                               km_df['euctr_days'])
+
+km_df['ctg_days'] = (km_df['ctgov_results_date'] - km_df['final_date']) / pd.Timedelta(1,"d")
+
+km_df['ctg_days'] = np.where(km_df['ctg_days'].isna(), 
+                               (search_start_date - km_df['final_date']) / pd.Timedelta(1,"d"),
+                               km_df['ctg_days'])
+
+km_df['pub_days'] = (km_df['journal_pub_date'] - km_df['final_date']) / pd.Timedelta(1,"d")
+
+km_df['pub_days'] = np.where(km_df['pub_days'].isna(), 
+                               (search_start_date - km_df['final_date']) / pd.Timedelta(1,"d"),
+                               km_df['pub_days'])
+
 
 # + trusted=true
-#Adding the earliest dissemination route
-
-conds = [post_euctr.euctr_results_date == post_euctr.min_date, 
-         post_euctr.ctgov_results_date == post_euctr.min_date, 
-         post_euctr.journal_pub_date == post_euctr.min_date]
-
-out = ['EUCTR', 'CTgov', 'Journal']
-
-post_euctr['earliest_results'] = np.select(conds, out, 'No Result')
-
-# + trusted=true
-first_report_post = post_euctr[post_euctr.nct_id.notnull()].earliest_results.value_counts()
-first_report_post
-
-# + trusted=true
-first_report_post.sum()
-
-# + trusted=true
-#Journal CIs
-summarizer(first_report_post[0], first_report_post.sum())
-
-# + trusted=true
-#EUCTR CIs
-summarizer(first_report_post[1], first_report_post.sum())
-
-# + trusted=true
-#CTG CIs
-summarizer(first_report_post[2], first_report_post.sum())
-
-# + trusted=true
-#What about trials not on ClinicalTrials.gov.
-first_pub_no_ctg = post_euctr[(post_euctr.nct_id.isna())].earliest_results.value_counts()
-first_pub_no_ctg
-
-# + trusted=true
-#CI for journal
-summarizer(first_pub_no_ctg[0],first_pub_no_ctg.sum())
-
-# + trusted=true
-#CI for EUCTR
-summarizer(first_pub_no_ctg[1],first_pub_no_ctg.sum())
+km_df.to_csv(parent + '/data/graphing_data/time_to_pub.csv')
 # -
-
-# # Data For Time to Reporting Across Routes
-
-# + trusted=true
-#So this is everything that could have appeared in all three places
-
-results_compare = post_euctr[post_euctr.nct_id.notnull()].reset_index(drop=True)
-
-# + trusted=true
-#This makes it so we can get the next result for any given first result.
-conds_t = [results_compare.results_counts == 1, 
-         results_compare.results_counts == 2,
-         results_compare.results_counts == 3]
-
-out_t = [pd.NaT,
-         results_compare.max_date,
-         results_compare[['euctr_results_date', 'ctgov_results_date', 'journal_pub_date']].median(axis=1, numeric_only=False)]
-
-results_compare['next_result_date'] = np.select(conds_t, out_t)
-results_compare['next_result_date'] = pd.to_datetime(results_compare['next_result_date']).dt.date
-
-#creating the censoring variable
-results_compare['next_result'] = np.where((results_compare.results_counts == 1), 0, 1)
-
-#need to do this because of weirdness with mixed types
-results_compare['next_result_date'] = results_compare['next_result_date'].replace(pd.NaT, search_start_date.date())
-results_compare['next_result_date'] = pd.to_datetime(results_compare['next_result_date'])
-
-# + trusted=true
-results_compare['time_to_second_pub'] = (results_compare.next_result_date - results_compare.min_date) / pd.Timedelta('1 day')
-
-# + trusted=true
-#Output for use in the Figures notebook
-
-#results_compare.to_csv(parent + '/data/graphing_data/time_next_pub.csv')
-# -
-
 
 # ## Data for Start Year Figure
 #
@@ -741,13 +671,11 @@ graphing_df = analysis_df[['euctr_id',
                                                     how='left', left_on='euctr_id', right_on='Trial ID').drop('Trial ID', axis=1)
 
 #graphing_df.to_csv(parent + '/data/graphing_data/start_year_data.csv')
-# -
 
+# + [markdown] tags=[]
 # # Reporting of Trial IDs
-#
-# Might need to re-adjust this so that only things eligible to have that ID (i.e. registered there) are in the denom
 
-# + trusted=true
+# + tags=[] trusted=true
 trial_id_df = analysis_df[['euctr_id', 'nct_id', 'isrctn_id', 'journal_results_inc', 'journal_reg_numbers']].reset_index(drop=True)
 
 # + trusted=true
@@ -839,10 +767,10 @@ exploratory_final[exploratory_final.enrollment.isna()]
 # #We will run `.value_counts()` on `sponsor_status`,`location`, and `trial_start_yr`
 
 # + trusted=true
-exploratory_final.protocol_country.describe()
+exploratory_final.enrollment.describe()
 
 # + trusted=true
-exploratory_final.trial_start_yr.value_counts().sort_index()
+exploratory_final.location.value_counts().sort_index()
 # -
 
 # ## Analysis 1: Regression
@@ -888,7 +816,7 @@ simple_logistic_regression(y_reg1, x_reg1)
 # `trial_start_yr`, `enrollment`, `protocol_country`, `location_EEA and Non-EEA`, `location_Non-EEA`, `sponsor_status_Commercial`
 
 # + trusted=true
-x_regu = regression_final[['trial_start_yr']].reset_index(drop=True)
+x_regu = regression_final[['location_EEA and Non-EEA', 'location_Non-EEA']].reset_index(drop=True)
 
 simple_logistic_regression(y_reg1, x_regu)
 # -
@@ -959,12 +887,357 @@ any_reporting.columns = ['sponsor_country', 'not_reported', 'reported', 'all']
 any_reporting['prct_reported'] = round((any_reporting.reported / any_reporting['all'])*100,2)
 any_reporting.sort_values(by='all', ascending=False)
 # -
+# # Peer Review Additions
+#
+# Additions to the analysis requested by, or added following, peer review
+
+# ## Breakdown of results by sponsor type
+
+# + trusted=true
+full_sample
+
+# + trusted=true
+spon_results = analysis_df.merge(other_reg_data[['trial_id', 'sponsor_status']], 
+                                 left_on='euctr_id', 
+                                 right_on='trial_id', 
+                                 how='left').merge(full_sample[['eudract_number', 'inferred']], 
+                                                   left_on='euctr_id', 
+                                                   right_on='eudract_number', 
+                                                   how='left')
+
+# + trusted=true
+spon_results.columns
+
+# + trusted=true
+#All Results
+crosstab(spon_results, 'any_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(240,277)
+print('\n')
+summarizer(143,222)
+
+# + trusted=true
+crosstab(spon_results[spon_results.inferred==0], 'any_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(233,260)
+print('\n')
+summarizer(79,94)
+
+# + trusted=true
+crosstab(spon_results[spon_results.inferred==1], 'any_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(7,17)
+print('\n')
+summarizer(64,128)
+
+# + trusted=true
+#a is the number of trials with results
+#b is the total number of trials
+
+a = [233, 7]
+b = [260,17]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+a = [79, 64]
+b = [94,128]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+#EUCTR
+crosstab(spon_results, 'euctr_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(214,277)
+print('\n')
+summarizer(52,222)
+
+# + trusted=true
+#How many had results on just the EUCTR?
+j_e = spon_results[spon_results.euctr_id.isin(euctr_results_ids - ctg_results_ids - isrctn_results_ids - journal_results_ids)]
+crosstab(j_e, 'euctr_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(41,240)
+print('\n')
+summarizer(14,143)
+
+# + trusted=true
+crosstab(spon_results[spon_results.inferred==0], 'euctr_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(214,260)
+print('\n')
+summarizer(51,94)
+
+# + trusted=true
+crosstab(spon_results[spon_results.inferred==1], 'euctr_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(0,17)
+print('\n')
+summarizer(1,128)
+
+# + trusted=true
+#a is the number of trials with results
+#b is the total number of trials
+
+a = [214, 0]
+b = [260,17]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+a = [51, 1]
+b = [94,127]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+#ClinicalTrials.gov
+crosstab(spon_results[spon_results.nct_id.notnull()], 'ctgov_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(129,235)
+print('\n')
+summarizer(4,104)
+
+# + trusted=true
+#How many had results on just CTgov?
+j_c = spon_results[spon_results.euctr_id.isin(ctg_results_ids - euctr_results_ids - isrctn_results_ids - journal_results_ids)]
+crosstab(j_c, 'ctgov_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(2,240)
+print('\n')
+summarizer(1,143)
+
+# + trusted=true
+crosstab(spon_results[(spon_results.inferred==0) & spon_results.nct_id.notnull()], 'ctgov_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(128,227)
+print('\n')
+summarizer(3,44)
+
+# + trusted=true
+crosstab(spon_results[(spon_results.inferred==1) & spon_results.nct_id.notnull()], 'ctgov_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(1,8)
+print('\n')
+summarizer(1,60)
+
+# + trusted=true
+#a is the number of trials with results
+#b is the total number of trials
+
+a = [128, 1]
+b = [227,8]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+a = [3, 1]
+b = [44, 60]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+#ISRCTN
+crosstab(spon_results[spon_results.isrctn_id.notnull()], 'isrctn_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(0,2)
+print('\n')
+summarizer(2,30)
+
+# + trusted=true
+#The ISRCTN has no unique results
+
+# + trusted=true
+crosstab(spon_results[(spon_results.inferred==0) & spon_results.isrctn_id.notnull()], 'isrctn_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(0,2)
+print('\n')
+summarizer(2,27)
+
+# + trusted=true
+crosstab(spon_results[(spon_results.inferred==1) & spon_results.isrctn_id.notnull()], 'isrctn_results_inc', 'sponsor_status')
+
+# + trusted=true
+#a is the number of trials with results
+#b is the total number of trials
+
+a = [0,0]
+b = [2,0]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+a = [2,0]
+b = [27,3]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+#Journal Articles
+crosstab(spon_results, 'journal_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(167,277)
+print('\n')
+summarizer(126,222)
+
+# + trusted=true
+#How many had results just in a journal?
+j_e = spon_results[spon_results.euctr_id.isin(journal_results_ids - euctr_results_ids - isrctn_results_ids - ctg_results_ids)]
+crosstab(j_e, 'journal_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(18,277)
+print('\n')
+summarizer(90,222)
+
+# + trusted=true
+crosstab(spon_results[(spon_results.inferred==0)], 'journal_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(160,260)
+print('\n')
+summarizer(64,94)
+
+# + trusted=true
+crosstab(spon_results[(spon_results.inferred==1)], 'journal_results_inc', 'sponsor_status')
+
+# + trusted=true
+summarizer(7,17)
+print('\n')
+summarizer(62,128)
+
+# + trusted=true
+#a is the number of trials with results
+#b is the total number of trials
+
+a = [160, 7]
+b = [260,17]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+a = [64, 62]
+b = [94,128]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+#Non-EUCTR
+spon_results['non_euctr_results'] = np.where((spon_results.ctgov_results_inc==1) | 
+                                             (spon_results.isrctn_results_inc==1) | 
+                                             (spon_results.journal_results_inc==1), 1,0)
+
+# + trusted=true
+crosstab(spon_results, 'non_euctr_results', 'sponsor_status')
+
+# + trusted=true
+summarizer(199,277)
+print('\n')
+summarizer(129,222)
+
+# + trusted=true
+crosstab(spon_results[(spon_results.inferred==0)], 'non_euctr_results', 'sponsor_status')
+
+# + trusted=true
+summarizer(192,260)
+print('\n')
+summarizer(66,94)
+
+# + trusted=true
+crosstab(spon_results[(spon_results.inferred==1)], 'non_euctr_results', 'sponsor_status')
+
+# + trusted=true
+summarizer(7,17)
+print('\n')
+summarizer(63,128)
+
+# + trusted=true
+#a is the number of trials with results
+#b is the total number of trials
+
+a = [192, 7]
+b = [260,17]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+a = [66, 63]
+b = [94,128]
+
+stat, pval = proportions_ztest(a, b)
+print(pval)
+
+# + trusted=true
+print(.05 / (11 - 1 + 1))
+print(.05 / (11 - 2 + 1))
+print(.05 / (11 - 3 + 1))
+print(.05 / (11 - 4 + 1))
+print(.05 / (11 - 5 + 1))
+print(.05 / (11 - 6 + 1))
+print(.05 / (11 - 7 + 1))
+print(.05 / (11 - 8 + 1))
+# -
+
+# ## Time to Searches
+#
+# Categorize the follow-up trials had.
+
+# + trusted=true
+#Lets make a copy of the sample data
+
+sample2 = full_sample[full_sample.eudract_number.isin(analysis_df.euctr_id.to_list())].copy()
+
+# + trusted=true
+sample2['final_date'] = pd.to_datetime(sample2['final_date'])
+sample2['days_to_search'] = (search_start_date - sample2['final_date']) / pd.Timedelta(1,"d")
+
+# + trusted=true
+sample2[sample2.inferred == 0].days_to_search.describe()
+
+# + trusted=true
+sample2[sample2.inferred == 1].days_to_search.describe()
+
+# + trusted=true
+#Moods test for independent medians
+
+inferred_data = sample2[sample2.inferred == 1].days_to_search
+
+extracted_data = sample2[sample2.inferred == 0].days_to_search
+
+stat, p, med, tbl = median_test(inferred_data, extracted_data)
+print(p)
+
+# + trusted=true
+#Data for plotting
+#sample2[['inferred', 'days_to_search']].to_csv(parent + '/data/graphing_data/days_to_search.csv')
+# -
 
 
-
-
-
-
-# +
 
 

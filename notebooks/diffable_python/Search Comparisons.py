@@ -48,7 +48,7 @@ study_data = pd.read_csv(parent + '/data/final_dataset/' + 'analysis_df.csv')
 df = reco_data[reco_data.euctr_res_nd.notnull()].merge(study_data[['euctr_id', 'euctr_results', 'nct_id', 'isrctn_id', 'journal_results_inc']], how='left', left_on='trial_id', right_on='euctr_id').reset_index(drop=True)
 
 # + trusted=true
-#The denominators here are out of 241 after exclusions. 
+#The denominators here are out of 239 after exclusions. 
 len(df)
 
 # + trusted=true
@@ -104,7 +104,7 @@ reco_checker(df, 'isrctn_nd', 'isrctn_2nd')
 cohen_kappa_score(df.isrctn_nd, df.isrctn_2nd)
 
 
-# +
+# + trusted=true
 #Now for publications
 
 # + trusted=true
@@ -116,7 +116,7 @@ reco_checker(df, 'pub_nd', 'pub_2nd')
 # + trusted=true
 cohen_kappa_score(df.pub_nd, df.pub_2nd)
 
-# +
+# + trusted=true
 #Did we find the same publication?
 
 # + trusted=true
@@ -125,7 +125,7 @@ df[(df.pub_nd == 1) & (df.pub_2nd == 1)].pub_match.value_counts()
 # + trusted=true
 98/110
 
-# +
+# + trusted=true
 #When we both found the same pub, did the extracted publication date match
 
 # + trusted=true
@@ -134,7 +134,7 @@ df[(df.pub_match == 1)].pub_date_match.value_counts()
 # + trusted=true
 67/98
 
-# +
+# + trusted=true
 #When we both found the same pub, did the extracted trial ID match
 
 # + trusted=true

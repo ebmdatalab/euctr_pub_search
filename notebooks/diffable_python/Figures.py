@@ -15,6 +15,18 @@
 # ---
 
 # + trusted=true
+import schemdraw
+from schemdraw import flow
+import matplotlib.pyplot as plt
+from upsetplot import from_indicators, plot
+import pandas as pd
+import numpy as np
+from matplotlib.patches import Patch
+from lifelines import KaplanMeierFitter
+from lifelines.plotting import add_at_risk_counts
+from lifelines.utils import median_survival_times
+
+# + trusted=true
 import sys
 from pathlib import Path
 import os
@@ -24,12 +36,6 @@ sys.path.append(parent)
 # -
 
 # # Flow Chart for Sample
-
-# + trusted=true
-import schemdraw
-from schemdraw import flow
-import matplotlib.pyplot as plt
-# -
 
 # Flowchart describing the processs to get from raw data to our sample for analysis. Numbers are from a dictionary called `flowchart_dict` in the `Data Processing and Handling` notebook and the 'Analysis Prep' of the `Analysis` notebook.
 
@@ -53,15 +59,15 @@ with schemdraw.Drawing() as d:
     d += flow.Box(w=5.5, h=1.5).label('Completed <24 Months\n(n=7,992)')
     
     d += flow.Arrow('left', l=1).at((1.3, -16))
-    d += flow.Box(w=5.5, h=3).label('Not Sampled\n(n=18,815)\n\nReplaced\n(n=14)')
+    d += flow.Box(w=5.5, h=3).label('Not Sampled\n(n=18,813)\n\nReplaced\n(n=15)')
     
     d += flow.Arrow('right', l=1).at((9, -16))
-    d += flow.Box(w=5.5, h=3).label('Not Sampled\n(n=7,906)\n\nReplaced\n(n=6)')
+    d += flow.Box(w=5.5, h=3).label('Not Sampled\n(n=7,906)\n\nReplaced\n(n=7)')
     
     d += flow.Arrow('down', l=6).at((9, -12.8))
-    d += flow.Box(w=4.5, h=1.5).label('Inferred Included\n(n=147)')
+    d += flow.Box(w=4.5, h=1.5).label('Inferred Included\n(n=146)')
     d += flow.Arrow('down', l=6).at((1.3, -12.8))
-    d += flow.Box(w=4.5, h=1.5).label('Extracted Included\n(n=353)')
+    d += flow.Box(w=4.5, h=1.5).label('Extracted Included\n(n=354)')
     
     #Final
     d += flow.Arrow(l=3).theta(-45).at((1.3,-20.3))
@@ -71,10 +77,6 @@ with schemdraw.Drawing() as d:
 #d.save(parent + '/data/Figures/flowchart.jpg')
 # -
 # # Upset Plot for Results
-
-# + trusted=true
-from upsetplot import from_indicators, plot
-import pandas as pd
 
 # + trusted=true
 upset_df = pd.read_csv(parent + '/data/graphing_data/upset_data.csv').drop('Unnamed: 0', axis=1)
@@ -103,9 +105,6 @@ plt.show()
 # # Upset Plot for Registrations
 
 # + trusted=true
-import numpy as np
-
-# + trusted=true
 upset_reg_df = pd.read_csv(parent + '/data/graphing_data/upset_reg_data.csv').drop('Unnamed: 0', axis=1)
 
 # + trusted=true
@@ -130,9 +129,6 @@ plt.show()
 
 # + [markdown] tags=[]
 # # Start Year Graphs
-
-# + trusted=true
-from matplotlib.patches import Patch
 
 # + trusted=true
 graphing_df = pd.read_csv(parent + '/data/graphing_data/start_year_data.csv')
@@ -194,74 +190,96 @@ plt.tight_layout()
 plt.subplots_adjust(hspace=.3)
 plt.show()
 
-#fig.savefig(parent + '/data/Figures/start_year_results.jpg')
+fig.savefig(parent + '/data/Figures/start_year_results.jpg')
 # -
-# # K-M plots for next reported
+# # Time to Searches Graph
 
 # + trusted=true
-from lifelines import KaplanMeierFitter
+to_pub = pd.read_csv(parent + '/data/graphing_data/days_to_search.csv')
 
 # + trusted=true
-km_df = pd.read_csv(parent + '/data/graphing_data/time_next_pub.csv')
+fig = plt.figure(figsize=(10, 6), dpi=300)
+
+group = 'inferred'
+column = 'days_to_search'
+grouped = to_pub.groupby(group)
+
+names, vals, xs = [], [] ,[]
+
+for i, (name, subdf) in enumerate(grouped):
+    names.append(name)
+    vals.append(subdf[column].tolist())
+    xs.append(np.random.normal(i+1, 0.04, subdf.shape[0]))
+
+plt.boxplot(vals, labels=['Extracted', 'Inferred'])
+ngroup = len(vals)
+
+for x, val in zip(xs, vals):
+    plt.scatter(x, val, alpha=0.4)
+
+plt.ylabel('Days From Completion to Search',labelpad=10)
+
+plt.show()
 
 # + trusted=true
-yticks = list(np.arange(0,1.1,.1))
+#fig.savefig(parent + '/data/Figures/time_to_search.jpg')
+# -
+# # KM for time to pub
+
+# + trusted=true
+km_pub = pd.read_csv(parent + '/data/graphing_data/time_to_pub.csv')
+
+# + trusted=true
+km_pub.columns
+
+# + trusted=true
+time_to_euctr = km_pub[['euctr_results_inc', 'euctr_days', 'inferred']]
+time_to_ctg = km_pub[km_pub.nct_id.notnull()][['ctgov_results_inc', 'ctg_days', 'inferred']]
+time_to_pub = km_pub[['journal_results_inc', 'pub_days', 'inferred']]
+
+# + trusted=true
 fig = plt.figure(dpi=300)
 ax = plt.subplot()
+yticks = list(np.arange(0,1.1,.1))
 
-euctr_data = km_df[km_df.earliest_results == 'EUCTR'].time_to_second_pub
-euctr_censor = km_df[km_df.earliest_results == 'EUCTR']['next_result']
+euctr = KaplanMeierFitter()
+euctr.fit(time_to_euctr[time_to_euctr.inferred == 0].euctr_days, time_to_euctr[time_to_euctr.inferred == 0].euctr_results_inc, label='EUCTR')
+ax = euctr.plot_cumulative_density(ci_show=False, figsize=(15,10), grid=True, ax=ax, show_censors=True, yticks=yticks)
 
-curve_1 = KaplanMeierFitter()
-curve_1.fit(euctr_data, euctr_censor, label='Appeared on EUCTR First')
-ax = curve_1.plot_cumulative_density(ci_show=False, 
-                                     yticks=yticks, 
-                                     figsize=(15,10), 
-                                     grid=True, 
-                                     lw = 2.5, 
-                                     ax=ax, 
-                                     show_censors=True)
+ctg = KaplanMeierFitter()
+ctg.fit(time_to_ctg[time_to_ctg.inferred == 0].ctg_days, time_to_ctg[time_to_ctg.inferred == 0].ctgov_results_inc,  label='ClinicalTrials.gov')
+ax = ctg.plot_cumulative_density(ci_show=False, figsize=(15,10), grid=True, ax=ax, show_censors=True, yticks=yticks)
 
-ctg_data = km_df[km_df.earliest_results == 'CTgov'].time_to_second_pub
-ctg_censor = km_df[km_df.earliest_results == 'CTgov']['next_result']
+pub = KaplanMeierFitter()
+pub.fit(time_to_pub[time_to_pub.inferred == 0].pub_days, time_to_pub[time_to_pub.inferred == 0].journal_results_inc,  label='Journal Article')
+ax = pub.plot_cumulative_density(ci_show=False, figsize=(15,10), grid=True, ax=ax, show_censors=True, yticks=yticks)
 
-curve_2 = KaplanMeierFitter()
-curve_2.fit(ctg_data, ctg_censor, label='Appeared on CTG First')
-ax = curve_2.plot_cumulative_density(ci_show=False, 
-                                     yticks=yticks, 
-                                     figsize=(15,10), 
-                                     grid=True, 
-                                     lw = 2.5, 
-                                     ax=ax, 
-                                     show_censors=True)
-
-pub_data = km_df[km_df.earliest_results == 'Journal'].time_to_second_pub
-pub_censor = km_df[km_df.earliest_results == 'Journal']['next_result']
-
-curve_3 = KaplanMeierFitter()
-curve_3.fit(pub_data, pub_censor, label='Appeared in a Journal First')
-ax = curve_3.plot_cumulative_density(ci_show=False, 
-                                     yticks=yticks, 
-                                     figsize=(15,10), 
-                                     grid=True, 
-                                     lw = 2.5, 
-                                     ax=ax, 
-                                     show_censors=True)
-
-ax.legend(fontsize = 16)
-plt.ylabel('Proportion Reported in a Second Dissemination Route', labelpad=10, fontsize=14)
-plt.xlabel('Days to Results on Second Dissemination Route', labelpad=10, fontsize=14)
-
-from lifelines.plotting import add_at_risk_counts
-add_at_risk_counts(curve_1, curve_2, curve_3, rows_to_show = ['At risk'], ax=ax)
+add_at_risk_counts(euctr, ctg, pub, rows_to_show = ['At risk'], ax=ax)
 plt.tight_layout()
 
-#plt.savefig(parent + '/data/Figures/time_to_next_results.jpg')
+fig.savefig(parent + '/data/Figures/time_to_results.jpg')
+# + trusted=true
+print(euctr.median_survival_time_)
+median_survival_times(euctr.confidence_interval_)
+
+# + trusted=true
+print(ctg.median_survival_time_)
+median_survival_times(ctg.confidence_interval_)
+
+
+# + trusted=true
+print(pub.median_survival_time_)
+median_survival_times(pub.confidence_interval_)
 # -
+
 
 
 
 
 # +
+
+# -
+
+
 
 
