@@ -795,6 +795,7 @@ x_reg = regression_final[['inferred', 'trial_start_yr', 'enrollment',
                          'sponsor_status_Commercial']].reset_index(drop=True)
 
 # + trusted=true
+# NBVAL_IGNORE_OUTPUT
 simple_logistic_regression(y_reg, x_reg)
 # -
 
@@ -808,6 +809,7 @@ x_reg1 = regression_final[['trial_start_yr', 'enrollment',
                          'sponsor_status_Commercial']].reset_index(drop=True)
 
 # + trusted=true
+# NBVAL_IGNORE_OUTPUT
 simple_logistic_regression(y_reg1, x_reg1)
 # -
 
@@ -816,6 +818,7 @@ simple_logistic_regression(y_reg1, x_reg1)
 # `trial_start_yr`, `enrollment`, `protocol_country`, `location_EEA and Non-EEA`, `location_Non-EEA`, `sponsor_status_Commercial`
 
 # + trusted=true
+# NBVAL_IGNORE_OUTPUT
 x_regu = regression_final[['location_EEA and Non-EEA', 'location_Non-EEA']].reset_index(drop=True)
 
 simple_logistic_regression(y_reg1, x_regu)
@@ -1239,5 +1242,6 @@ print(p)
 # -
 
 
+# +
 
 
