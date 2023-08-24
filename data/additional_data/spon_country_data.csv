@@ -341,180 +341,182 @@
 339,2011-000774-58,Commercial,1.0,United States
 340,2011-000811-23,Non-Commercial,1.0,United Kingdom
 341,2011-000947-26,Commercial,2.0,Multi-country
-342,2011-001483-21,Commercial,6.0,Sweden
-343,2011-001616-57,Commercial,2.0,France
-344,2011-001725-24,Commercial,5.0,Switzerland
-345,2011-001756-12,Non-Commercial,1.0,Belgium
-346,2011-001965-42,Commercial,9.0,Switzerland
-347,2011-002268-26,Non-Commercial,1.0,Canada
-348,2011-002329-23,Commercial,2.0,United States
-349,2011-002453-65,Commercial,2.0,United States
-350,2011-002472-16,Commercial,1.0,Germany
-351,2011-002865-39,Commercial,3.0,France
-352,2011-002908-33,Commercial,5.0,Germany
-353,2011-003317-41,Commercial,1.0,Germany
-354,2011-003325-10,Non-Commercial,1.0,Netherlands
-355,2011-003509-65,Non-Commercial,1.0,Italy
-356,2011-003560-74,Non-Commercial,1.0,Netherlands
-357,2011-003574-84,Commercial,5.0,Switzerland
-358,2011-003654-40,Non-Commercial,1.0,Ireland
-359,2011-003832-30,Commercial,6.0,United States
-360,2011-004237-14,Commercial,6.0,Belgium
-361,2011-004355-40,Commercial,5.0,Denmark
-362,2011-004498-96,Non-Commercial,1.0,United Kingdom
-363,2011-004559-38,Non-Commercial,1.0,United Kingdom
-364,2011-004584-67,Commercial,2.0,France
-365,2011-004886-34,Commercial,2.0,United States
-366,2011-005017-37,Non-Commercial,1.0,Netherlands
-367,2011-005061-20,Commercial,4.0,United States
-368,2011-005366-38,Non-Commercial,1.0,Sweden
-369,2011-005461-21,Non-Commercial,1.0,Italy
-370,2011-005616-29,Non-Commercial,1.0,United Kingdom
-371,2011-005622-21,Non-Commercial,1.0,Denmark
-372,2011-005666-37,Commercial,1.0,Italy
-373,2011-005683-21,Non-Commercial,1.0,Austria
-374,2011-006119-70,Commercial,7.0,United Kingdom
-375,2011-006121-26,Commercial,3.0,Belgium
-376,2011-006162-40,Non-Commercial,1.0,Spain
-377,2011-006174-47,Commercial,3.0,Netherlands
-378,2011-006179-20,Non-Commercial,1.0,Spain
-379,2011-006294-26,Commercial,3.0,Austria
-380,2011-006331-35,Non-Commercial,1.0,Italy
-381,2012-000057-31,Commercial,1.0,Belgium
-382,2012-000109-66,Commercial,9.0,United States
-383,2012-000347-28,Commercial,7.0,Germany
-384,2012-000363-24,Non-Commercial,1.0,Netherlands
-385,2012-000869-21,Non-Commercial,1.0,Italy
-386,2012-001125-27,Commercial,6.0,France
-387,2012-001142-18,Non-Commercial,1.0,Netherlands
-388,2012-001249-41,Non-Commercial,3.0,Switzerland
-389,2012-001515-22,Non-Commercial,1.0,Belgium
-390,2012-001570-29,Non-Commercial,1.0,Netherlands
-391,2012-001709-26,Commercial,1.0,Czech Republic
-392,2012-001711-23,Commercial,6.0,Denmark
-393,2012-001809-24,Non-Commercial,1.0,Netherlands
-394,2012-001956-20,Commercial,6.0,United States
-395,2012-002105-22,Non-Commercial,1.0,Spain
-396,2012-002255-42,Commercial,1.0,United Arab Emirates
-397,2012-002278-30,Non-Commercial,1.0,Germany
-398,2012-002418-38,Non-Commercial,1.0,Netherlands
-399,2012-002573-62,Non-Commercial,1.0,Sweden
-400,2012-002669-37,Commercial,7.0,Switzerland
-401,2012-002806-31,Commercial,9.0,United States
-402,2012-003110-14,Commercial,8.0,United States
-403,2012-003137-41,Commercial,1.0,Portugal
-404,2012-003487-48,Commercial,5.0,France
-405,2012-003516-31,Non-Commercial,1.0,Belgium
-406,2012-004300-35,Commercial,1.0,Germany
-407,2012-004368-23,Non-Commercial,1.0,Denmark
-408,2012-004442-15,Non-Commercial,1.0,Germany
-409,2012-004938-42,Non-Commercial,1.0,Netherlands
-410,2012-004987-23,Commercial,5.0,United States
-411,2012-004993-25,Commercial,1.0,Greece
-412,2012-005048-46,Non-Commercial,1.0,Italy
-413,2012-005232-29,Commercial,1.0,Hungary
-414,2012-005332-29,Non-Commercial,1.0,Netherlands
-415,2012-005627-32,Non-Commercial,1.0,United Kingdom
-416,2012-005796-14,Non-Commercial,1.0,Austria
-417,2012-005842-39,Non-Commercial,1.0,Sweden
-418,2013-000024-34,Non-Commercial,1.0,Italy
-419,2013-000056-18,Commercial,1.0,Belgium
-420,2013-000176-15,Commercial,10.0,Switzerland
-421,2013-000536-10,Commercial,12.0,United States
-422,2013-000583-29,Non-Commercial,1.0,Belgium
-423,2013-000621-30,Commercial,1.0,Netherlands
-424,2013-000639-29,Non-Commercial,1.0,Austria
-425,2013-000823-15,Non-Commercial,1.0,Germany
-426,2013-000850-23,Non-Commercial,1.0,France
-427,2013-001103-36,Non-Commercial,1.0,United Kingdom
-428,2013-001141-14,Commercial,6.0,Switzerland
-429,2013-001229-15,Non-Commercial,1.0,Spain
-430,2013-001421-55,Commercial,1.0,France
-431,2013-001557-27,Commercial,2.0,United States
-432,2013-001766-42,Commercial,1.0,United Kingdom
-433,2013-001868-40,Non-Commercial,1.0,United Kingdom
-434,2013-002154-67,Non-Commercial,1.0,Spain
-435,2013-002165-19,Non-Commercial,1.0,Netherlands
-436,2013-002183-63,Non-Commercial,1.0,Spain
-437,2013-002451-15,Non-Commercial,2.0,Belgium
-438,2013-002850-54,Commercial,1.0,France
-439,2013-002997-33,Commercial,7.0,United States
-440,2013-003000-39,Commercial,6.0,France
-441,2013-003183-31,Commercial,8.0,Italy
-442,2013-003227-11,Commercial,1.0,Netherlands
-443,2013-003323-11,Non-Commercial,1.0,Italy
-444,2013-003328-35,Non-Commercial,1.0,France
-445,2013-003363-64,Non-Commercial,1.0,United Kingdom
-446,2013-003561-34,Commercial,3.0,United States
-447,2013-003587-31,Commercial,4.0,United States
-448,2013-003660-31,Non-Commercial,4.0,United States
-449,2013-003873-85,Non-Commercial,1.0,Finland
-450,2013-004042-42,Non-Commercial,1.0,United Kingdom
-451,2013-004544-32,Commercial,1.0,"Korea, Republic of"
-452,2013-004562-33,Non-Commercial,1.0,Italy
-453,2013-004593-95,Non-Commercial,1.0,Spain
-454,2013-004654-13,Commercial,8.0,United States
-455,2013-005062-19,Non-Commercial,1.0,Austria
-456,2013-005161-40,Commercial,6.0,United Kingdom
-457,2013-005464-25,Commercial,10.0,United States
-458,2013-005594-51,Non-Commercial,1.0,Belgium
-459,2013-005628-41,Commercial,3.0,United States
-460,2014-000042-30,Commercial,6.0,United States
-461,2014-000177-39,Non-Commercial,1.0,Italy
-462,2014-000340-15,Commercial,4.0,Netherlands
-463,2014-001081-99,Commercial,1.0,Belgium
-464,2014-001096-31,Commercial,3.0,Germany
-465,2014-001158-41,Commercial,1.0,Italy
-466,2014-001295-65,Commercial,4.0,France
-467,2014-001644-38,Commercial,5.0,United States
-468,2014-001706-17,Commercial,0.0,France
-469,2014-001759-22,Commercial,3.0,France
-470,2014-001786-26,Non-Commercial,1.0,Denmark
-471,2014-002003-25,Non-Commercial,1.0,United Kingdom
-472,2014-002841-23,Commercial,9.0,Belgium
-473,2014-002986-30,Commercial,5.0,Switzerland
-474,2014-003135-19,Commercial,5.0,United States
-475,2014-003401-15,Commercial,0.0,Japan
-476,2014-003558-15,Commercial,6.0,Germany
-477,2014-003790-41,Commercial,1.0,Spain
-478,2014-003846-29,Commercial,1.0,United States
-479,2014-003896-41,Commercial,2.0,United States
-480,2014-004162-17,Commercial,0.0,United States
-481,2014-004194-16,Non-Commercial,1.0,Italy
-482,2014-004335-39,Commercial,0.0,Japan
-483,2014-004454-34,Commercial,0.0,Denmark
-484,2014-004655-31,Commercial,1.0,Switzerland
-485,2014-004751-31,Commercial,1.0,United States
-486,2014-004972-49,Commercial,3.0,Switzerland
-487,2014-005477-37,Commercial,9.0,Austria
-488,2014-005556-25,Non-Commercial,1.0,Spain
-489,2015-000159-26,Commercial,1.0,Sweden
-490,2015-000458-40,Commercial,1.0,United Kingdom
-491,2015-001956-31,Non-Commercial,1.0,Denmark
-492,2015-002191-25,Commercial,4.0,Multi-country
-493,2015-002396-18,Commercial,5.0,Germany
-494,2015-002706-36,Non-Commercial,1.0,Netherlands
-495,2015-002724-16,Commercial,1.0,United States
-496,2015-002898-37,Commercial,5.0,Switzerland
-497,2015-002963-40,Non-Commercial,1.0,Spain
-498,2015-003260-37,Non-Commercial,1.0,United Kingdom
-499,2015-003397-33,Non-Commercial,1.0,Italy
-500,2015-003537-99,Commercial,0.0,Switzerland
-501,2015-003625-34,Commercial,7.0,Multi-country
-502,2015-003639-37,Commercial,1.0,Sweden
-503,2015-003696-30,Commercial,1.0,United Kingdom
-504,2015-004026-34,Commercial,4.0,"Korea, Republic of"
-505,2015-004768-12,Commercial,1.0,Denmark
-506,2015-005190-21,Commercial,0.0,France
-507,2015-005226-19,Non-Commercial,1.0,Austria
-508,2016-000049-30,Commercial,2.0,Netherlands
-509,2016-000205-36,Non-Commercial,1.0,Germany
-510,2016-000867-18,Non-Commercial,1.0,Belgium
-511,2016-001638-84,Non-Commercial,1.0,Netherlands
-512,2016-002210-46,Non-Commercial,1.0,Netherlands
-513,2016-002513-22,Commercial,6.0,United Kingdom
-514,2016-002531-15,Non-Commercial,1.0,United Kingdom
-515,2016-004944-12,Commercial,0.0,United States
-516,2017-001373-16,Commercial,1.0,Switzerland
-517,2017-001607-80,Commercial,0.0,Belgium
-518,2017-005115-13,Commercial,4.0,United States
+342,2011-001007-12,Commercial,8.0,United States
+343,2011-001483-21,Commercial,6.0,Sweden
+344,2011-001616-57,Commercial,2.0,France
+345,2011-001725-24,Commercial,5.0,Switzerland
+346,2011-001756-12,Non-Commercial,1.0,Belgium
+347,2011-001965-42,Commercial,9.0,Switzerland
+348,2011-002268-26,Non-Commercial,1.0,Canada
+349,2011-002329-23,Commercial,2.0,United States
+350,2011-002453-65,Commercial,2.0,United States
+351,2011-002472-16,Commercial,1.0,Germany
+352,2011-002865-39,Commercial,3.0,France
+353,2011-002908-33,Commercial,5.0,Germany
+354,2011-003317-41,Commercial,1.0,Germany
+355,2011-003325-10,Non-Commercial,1.0,Netherlands
+356,2011-003509-65,Non-Commercial,1.0,Italy
+357,2011-003560-74,Non-Commercial,1.0,Netherlands
+358,2011-003574-84,Commercial,5.0,Switzerland
+359,2011-003654-40,Non-Commercial,1.0,Ireland
+360,2011-003832-30,Commercial,6.0,United States
+361,2011-004237-14,Commercial,6.0,Belgium
+362,2011-004355-40,Commercial,5.0,Denmark
+363,2011-004498-96,Non-Commercial,1.0,United Kingdom
+364,2011-004559-38,Non-Commercial,1.0,United Kingdom
+365,2011-004584-67,Commercial,2.0,France
+366,2011-004886-34,Commercial,2.0,United States
+367,2011-005017-37,Non-Commercial,1.0,Netherlands
+368,2011-005061-20,Commercial,4.0,United States
+369,2011-005366-38,Non-Commercial,1.0,Sweden
+370,2011-005461-21,Non-Commercial,1.0,Italy
+371,2011-005616-29,Non-Commercial,1.0,United Kingdom
+372,2011-005622-21,Non-Commercial,1.0,Denmark
+373,2011-005666-37,Commercial,1.0,Italy
+374,2011-005683-21,Non-Commercial,1.0,Austria
+375,2011-006119-70,Commercial,7.0,United Kingdom
+376,2011-006121-26,Commercial,3.0,Belgium
+377,2011-006162-40,Non-Commercial,1.0,Spain
+378,2011-006174-47,Commercial,3.0,Netherlands
+379,2011-006179-20,Non-Commercial,1.0,Spain
+380,2011-006294-26,Commercial,3.0,Austria
+381,2011-006331-35,Non-Commercial,1.0,Italy
+382,2012-000057-31,Commercial,1.0,Belgium
+383,2012-000109-66,Commercial,9.0,United States
+384,2012-000347-28,Commercial,7.0,Germany
+385,2012-000363-24,Non-Commercial,1.0,Netherlands
+386,2012-000869-21,Non-Commercial,1.0,Italy
+387,2012-001125-27,Commercial,6.0,France
+388,2012-001142-18,Non-Commercial,1.0,Netherlands
+389,2012-001249-41,Non-Commercial,3.0,Switzerland
+390,2012-001515-22,Non-Commercial,1.0,Belgium
+391,2012-001570-29,Non-Commercial,1.0,Netherlands
+392,2012-001709-26,Commercial,1.0,Czech Republic
+393,2012-001711-23,Commercial,6.0,Denmark
+394,2012-001809-24,Non-Commercial,1.0,Netherlands
+395,2012-001956-20,Commercial,6.0,United States
+396,2012-002105-22,Non-Commercial,1.0,Spain
+397,2012-002255-42,Commercial,1.0,United Arab Emirates
+398,2012-002278-30,Non-Commercial,1.0,Germany
+399,2012-002418-38,Non-Commercial,1.0,Netherlands
+400,2012-002573-62,Non-Commercial,1.0,Sweden
+401,2012-002669-37,Commercial,7.0,Switzerland
+402,2012-002806-31,Commercial,9.0,United States
+403,2012-003110-14,Commercial,8.0,United States
+404,2012-003137-41,Commercial,1.0,Portugal
+405,2012-003487-48,Commercial,5.0,France
+406,2012-003516-31,Non-Commercial,1.0,Belgium
+407,2012-004300-35,Commercial,1.0,Germany
+408,2012-004368-23,Non-Commercial,1.0,Denmark
+409,2012-004442-15,Non-Commercial,1.0,Germany
+410,2012-004938-42,Non-Commercial,1.0,Netherlands
+411,2012-004987-23,Commercial,5.0,United States
+412,2012-004993-25,Commercial,1.0,Greece
+413,2012-005048-46,Non-Commercial,1.0,Italy
+414,2012-005232-29,Commercial,1.0,Hungary
+415,2012-005332-29,Non-Commercial,1.0,Netherlands
+416,2012-005627-32,Non-Commercial,1.0,United Kingdom
+417,2012-005796-14,Non-Commercial,1.0,Austria
+418,2012-005842-39,Non-Commercial,1.0,Sweden
+419,2013-000024-34,Non-Commercial,1.0,Italy
+420,2013-000056-18,Commercial,1.0,Belgium
+421,2013-000176-15,Commercial,10.0,Switzerland
+422,2013-000536-10,Commercial,12.0,United States
+423,2013-000583-29,Non-Commercial,1.0,Belgium
+424,2013-000621-30,Commercial,1.0,Netherlands
+425,2013-000639-29,Non-Commercial,1.0,Austria
+426,2013-000823-15,Non-Commercial,1.0,Germany
+427,2013-000850-23,Non-Commercial,1.0,France
+428,2013-001103-36,Non-Commercial,1.0,United Kingdom
+429,2013-001141-14,Commercial,6.0,Switzerland
+430,2013-001229-15,Non-Commercial,1.0,Spain
+431,2013-001421-55,Commercial,1.0,France
+432,2013-001557-27,Commercial,2.0,United States
+433,2013-001766-42,Commercial,1.0,United Kingdom
+434,2013-001868-40,Non-Commercial,1.0,United Kingdom
+435,2013-002154-67,Non-Commercial,1.0,Spain
+436,2013-002165-19,Non-Commercial,1.0,Netherlands
+437,2013-002183-63,Non-Commercial,1.0,Spain
+438,2013-002451-15,Non-Commercial,2.0,Belgium
+439,2013-002850-54,Commercial,1.0,France
+440,2013-002997-33,Commercial,7.0,United States
+441,2013-003000-39,Commercial,6.0,France
+442,2013-003183-31,Commercial,8.0,Italy
+443,2013-003227-11,Commercial,1.0,Netherlands
+444,2013-003323-11,Non-Commercial,1.0,Italy
+445,2013-003328-35,Non-Commercial,1.0,France
+446,2013-003363-64,Non-Commercial,1.0,United Kingdom
+447,2013-003561-34,Commercial,3.0,United States
+448,2013-003587-31,Commercial,4.0,United States
+449,2013-003660-31,Non-Commercial,4.0,United States
+450,2013-003873-85,Non-Commercial,1.0,Finland
+451,2013-004042-42,Non-Commercial,1.0,United Kingdom
+452,2013-004544-32,Commercial,1.0,"Korea, Republic of"
+453,2013-004562-33,Non-Commercial,1.0,Italy
+454,2013-004593-95,Non-Commercial,1.0,Spain
+455,2013-004654-13,Commercial,8.0,United States
+456,2013-005062-19,Non-Commercial,1.0,Austria
+457,2013-005161-40,Commercial,6.0,United Kingdom
+458,2013-005464-25,Commercial,10.0,United States
+459,2013-005594-51,Non-Commercial,1.0,Belgium
+460,2013-005628-41,Commercial,3.0,United States
+461,2014-000042-30,Commercial,6.0,United States
+462,2014-000177-39,Non-Commercial,1.0,Italy
+463,2014-000340-15,Commercial,4.0,Netherlands
+464,2014-001081-99,Commercial,1.0,Belgium
+465,2014-001096-31,Commercial,3.0,Germany
+466,2014-001158-41,Commercial,1.0,Italy
+467,2014-001295-65,Commercial,4.0,France
+468,2014-001644-38,Commercial,5.0,United States
+469,2014-001706-17,Commercial,0.0,France
+470,2014-001759-22,Commercial,3.0,France
+471,2014-001786-26,Non-Commercial,1.0,Denmark
+472,2014-002003-25,Non-Commercial,1.0,United Kingdom
+473,2014-002841-23,Commercial,9.0,Belgium
+474,2014-002986-30,Commercial,5.0,Switzerland
+475,2014-003135-19,Commercial,5.0,United States
+476,2014-003401-15,Commercial,0.0,Japan
+477,2014-003558-15,Commercial,6.0,Germany
+478,2014-003790-41,Commercial,1.0,Spain
+479,2014-003846-29,Commercial,1.0,United States
+480,2014-003896-41,Commercial,2.0,United States
+481,2014-004162-17,Commercial,0.0,United States
+482,2014-004194-16,Non-Commercial,1.0,Italy
+483,2014-004335-39,Commercial,0.0,Japan
+484,2014-004454-34,Commercial,0.0,Denmark
+485,2014-004655-31,Commercial,1.0,Switzerland
+486,2014-004751-31,Commercial,1.0,United States
+487,2014-004972-49,Commercial,3.0,Switzerland
+488,2014-005477-37,Commercial,9.0,Austria
+489,2014-005556-25,Non-Commercial,1.0,Spain
+490,2015-000159-26,Commercial,1.0,Sweden
+491,2015-000458-40,Commercial,1.0,United Kingdom
+492,2015-001956-31,Non-Commercial,1.0,Denmark
+493,2015-002191-25,Commercial,4.0,Multi-country
+494,2015-002396-18,Commercial,5.0,Germany
+495,2015-002706-36,Non-Commercial,1.0,Netherlands
+496,2015-002724-16,Commercial,1.0,United States
+497,2015-002898-37,Commercial,5.0,Switzerland
+498,2015-002963-40,Non-Commercial,1.0,Spain
+499,2015-003260-37,Non-Commercial,1.0,United Kingdom
+500,2015-003397-33,Non-Commercial,1.0,Italy
+501,2015-003537-99,Commercial,0.0,Switzerland
+502,2015-003625-34,Commercial,7.0,Multi-country
+503,2015-003639-37,Commercial,1.0,Sweden
+504,2015-003696-30,Commercial,1.0,United Kingdom
+505,2015-004026-34,Commercial,4.0,"Korea, Republic of"
+506,2015-004768-12,Commercial,1.0,Denmark
+507,2015-005190-21,Commercial,0.0,France
+508,2015-005226-19,Non-Commercial,1.0,Austria
+509,2016-000049-30,Commercial,2.0,Netherlands
+510,2016-000205-36,Non-Commercial,1.0,Germany
+511,2016-000867-18,Non-Commercial,1.0,Belgium
+512,2016-001575-71,Commercial,2.0,United States
+513,2016-001638-84,Non-Commercial,1.0,Netherlands
+514,2016-002210-46,Non-Commercial,1.0,Netherlands
+515,2016-002513-22,Commercial,6.0,United Kingdom
+516,2016-002531-15,Non-Commercial,1.0,United Kingdom
+517,2016-004944-12,Commercial,0.0,United States
+518,2017-001373-16,Commercial,1.0,Switzerland
+519,2017-001607-80,Commercial,0.0,Belgium
+520,2017-005115-13,Commercial,4.0,United States
