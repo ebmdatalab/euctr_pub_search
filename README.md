@@ -17,6 +17,8 @@ how to run this study in a Docker environment. A Docker installation guide is av
 
 *notebooks* - This contains the jupyter notebooks for data processing and handling, the main analysis, figure creation, and the assessment of inter-searcher reliability.
 
+Most of the remaining directories are related to Docker-izing the repository.
+
 ## How to view the notebooks
 
 Notebooks live in the `notebooks/` folder (with an `ipynb`
