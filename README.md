@@ -1,20 +1,21 @@
-# EBM DataLab's skeleton notebook environment
+# Cross-registration and results availability of trials registered on the EUCTR
 
-## Getting started with this skeleton project
+This analysis was published, open access, in [BMJ Medicine](https://doi.org/10.1136/bmjmed-2023-000738) in January 2024. Please cite the manuscript when referencing the code.
 
-This is a skeleton project for creating a reproducible, cross-platform
-analysis notebook, using Docker.  It also includes:
+A pre-registered protocol and other project materials are available on the [OSF](https://osf.io/r3vc5/).
 
-* configuration for `jupytext`, to support easier code review
-* cross-platform startup scripts
-* best practice folder structure and documentation
+## Repository Details
 
-Developers and analysts using this skeleton for new development should
-refer to [`DEVELOPERS.md`](DEVELOPERS.md) for instructions on getting
-started.  Update this `README.md` so it is a suitable introduction to
-your project.
+This is a Docker-ready repsoitory containing code and data for this project. Please consult [`DEVELOPERS.md`](DEVELOPERS.md) for instructions on 
+how to run this study in a Docker environment. A Docker installation guide is available at [`INSTALLATION_GUIDE.md`](INSTALLATION_GUIDE.md)
 
-If you have not yet installed Docker, please see the [`INSTALLATION_GUIDE.md`](INSTALLATION_GUIDE.md)
+### Key Directories
+
+*data* - This contains all the data for the project that is needed to run the code, or is created by the code.
+
+*lib* - This contains various helper functions for use in the analysis notebooks.
+
+*notebooks* - This contains the jupyter notebooks for data processing and handling, the main analysis, figure creation, and the assessment of inter-searcher reliability.
 
 ## How to view the notebooks
 
@@ -25,7 +26,3 @@ though looking at them in Github should also work.
 
 To do development work, you'll need to set up a local jupyter server
 and git repository - see `DEVELOPERS.md` for more detail.
-
-## How to cite
-
-XXX Please change to either a paper (if published) or the repo. You may find it helpful to use Zenodo DOI (see [`DEVELOPERS.md`](DEVELOPERS.md#how-to-invite-people-to-cite) for further information)
